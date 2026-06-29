@@ -140,7 +140,8 @@ def build_sample_context() -> dict[str, Any]:
             "is_manager": "否",
             "employment_status": "在职",
             "signature": "张三",
-            "probation_end_date": "2024年01月22日",
+            "probation_end_date": "2024年01月23日",
+            "probation_period": "2024年01月15日至2024年01月23日",
         },
         "document": {
             "date": doc_date,

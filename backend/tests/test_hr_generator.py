@@ -8,6 +8,7 @@ from app.core.calendar import WorkCalendar
 from app.models.employee import Employee
 from app.models.sample_roster_data import sample_employees_as_models
 from app.services.hr_generator import (
+    TMPL_PROBATION_APP,
     TMPL_ROSTER,
     build_onboarding_training_list_data,
     build_roster_list_data,
@@ -15,11 +16,13 @@ from app.services.hr_generator import (
     find_general_manager_name,
     find_hr_manager_name,
     find_training_plan_preparer_name,
+    generate_probation_docs,
     generate_roster,
     resolve_employee_manager_map,
     resolve_manager_map,
 )
 from app.services.renderer import render_list_region
+from app.services.signature import SignatureStore
 from app.templates.loader import TemplateLoader
 
 
@@ -37,6 +40,28 @@ def _employee(
         hire_date=date(2024, 1, 15),
         is_manager=is_manager,
     )
+
+
+def test_employee_probation_period_from_hire_date() -> None:
+    emp = _employee("张三", "生产部")
+    ns = emp.to_namespace_dict()
+    assert ns["probation_period"] == "2024年01月15日至2024年01月23日"
+
+
+def test_generate_probation_app_includes_probation_period() -> None:
+    template_base = Path(__file__).parent.parent.parent / "template"
+    loader = TemplateLoader(template_base)
+    emp = _employee("张三", "生产部")
+    results = generate_probation_docs(
+        emp,
+        loader,
+        {"name": "示例企业有限公司"},
+        SignatureStore(),
+        calendar=WorkCalendar(),
+    )
+    probation_app = next(r for r in results if r.template_id == TMPL_PROBATION_APP)
+    assert "2024年01月15日至2024年01月23日" in probation_app.html
+    assert "年　　月　　日至　　年　　月　　日" not in probation_app.html
 
 
 def test_find_hr_manager_prefers_manager_in_hr_department() -> None:

@@ -75,6 +75,7 @@ EMPLOYEE_KEYS: Final[frozenset[str]] = frozenset(
         "employment_status",  # 在职状态
         "signature",          # 签名（图片 base64 或文本回退）
         "probation_end_date", # 转正日期（推导）
+        "probation_period",   # 试用期区间（入职日至转正日）
     }
 )
 

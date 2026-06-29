@@ -55,6 +55,12 @@ class Employee:
 
     def to_namespace_dict(self) -> dict[str, Any]:
         """Return a flat dict keyed by ``employee.<field>`` values."""
+        probation_end = self.probation_end_date
+        if probation_end is None and self.hire_date:
+            from app.core.calendar import probation_end_date as calc_probation_end
+
+            probation_end = calc_probation_end(self.hire_date, self.is_regular_employee)
+
         return {
             "name": self.name,
             "department_name": self.department_name,
@@ -74,7 +80,12 @@ class Employee:
             "is_regular_employee": "是" if self.is_regular_employee else "否",
             "is_manager": "是" if self.is_manager else "否",
             "employment_status": self.employment_status,
-            "probation_end_date": _fmt_date(self.probation_end_date),
+            "probation_end_date": _fmt_date(probation_end),
+            "probation_period": (
+                f"{_fmt_date(self.hire_date)}至{_fmt_date(probation_end)}"
+                if probation_end
+                else ""
+            ),
             "signature": self.signature,
         }
 

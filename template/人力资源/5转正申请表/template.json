@@ -30,6 +30,13 @@
         "source": "employee.position_name",
         "type": "text",
         "location": "岗位"
+      },
+      {
+        "key": "试用期",
+        "label": "试用期",
+        "source": "employee.probation_period",
+        "type": "text",
+        "location": "试用期"
       }
     ],
     "signature_mappings": [],

@@ -209,6 +209,15 @@ def _playwright_available() -> bool:
     return _PLAYWRIGHT_AVAILABLE
 
 
+_PDF_MARGIN = {"top": "12mm", "bottom": "12mm", "left": "12mm", "right": "12mm"}
+
+
+def _prepare_html_for_pdf(html: str) -> str:
+    if "</head>" in html:
+        return html.replace("</head>", _FONT_INJECT + _PRINT_CSS_INJECT + "</head>", 1)
+    return html
+
+
 def html_to_pdf(html: str, output_path: Path | None = None) -> bytes:
     """Convert *html* to PDF bytes using Playwright (preferred) or weasyprint.
 
@@ -219,10 +228,7 @@ def html_to_pdf(html: str, output_path: Path | None = None) -> bytes:
     Returns:
         Raw PDF bytes.
     """
-    # Inject print font hint and layout optimizations before </head>
-    if "</head>" in html:
-        html = html.replace("</head>", _FONT_INJECT + _PRINT_CSS_INJECT + "</head>", 1)
-
+    html = _prepare_html_for_pdf(html)
     pdf_bytes = (
         _pdf_via_playwright(html) if _playwright_available() else None
     ) or _pdf_via_weasyprint(html)
@@ -233,24 +239,64 @@ def html_to_pdf(html: str, output_path: Path | None = None) -> bytes:
     return pdf_bytes or b""
 
 
+def html_contents_to_pdf(contents: list[bytes]) -> list[bytes]:
+    """Convert HTML byte blobs to PDF, reusing one Playwright browser for the batch."""
+    results: list[bytes] = [b""] * len(contents)
+    pending: list[tuple[int, str]] = []
+
+    for idx, content in enumerate(contents):
+        if content.startswith(b"%PDF"):
+            results[idx] = content
+            continue
+        stripped = content.lstrip()
+        if stripped.startswith(b"<") or stripped.startswith(b"<!"):
+            pending.append((idx, _prepare_html_for_pdf(content.decode("utf-8"))))
+        else:
+            results[idx] = content
+
+    if not pending:
+        return results
+
+    batch = _pdf_batch_via_playwright([html for _, html in pending])
+    if batch is not None:
+        for (idx, _), pdf in zip(pending, batch):
+            results[idx] = pdf
+        return results
+
+    for idx, html in pending:
+        results[idx] = _pdf_via_weasyprint(html) or b""
+    return results
+
+
 def _pdf_via_playwright(html: str) -> bytes | None:
+    batch = _pdf_batch_via_playwright([html])
+    return batch[0] if batch else None
+
+
+def _pdf_batch_via_playwright(htmls: list[str]) -> list[bytes] | None:
+    if not htmls:
+        return []
     try:
         from playwright.sync_api import sync_playwright  # type: ignore[import]
 
+        pdfs: list[bytes] = []
         with sync_playwright() as p:
             browser = p.chromium.launch()
             page = browser.new_page()
-            page.set_content(html, wait_until="networkidle")
-            pdf = page.pdf(
-                format="A4",
-                print_background=True,
-                prefer_css_page_size=True,
-                margin={"top": "12mm", "bottom": "12mm", "left": "12mm", "right": "12mm"},
-            )
+            for html in htmls:
+                page.set_content(html, wait_until="domcontentloaded")
+                pdfs.append(
+                    page.pdf(
+                        format="A4",
+                        print_background=True,
+                        prefer_css_page_size=True,
+                        margin=_PDF_MARGIN,
+                    )
+                )
             browser.close()
-            return pdf
+        return pdfs
     except Exception as exc:
-        logger.warning("Playwright PDF failed: %s", exc)
+        logger.warning("Playwright batch PDF failed: %s", exc)
         return None
 
 

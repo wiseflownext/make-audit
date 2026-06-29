@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import Response, StreamingResponse
+from fastapi.responses import HTMLResponse, Response, StreamingResponse
 from pydantic import BaseModel
 
 from app.api import intake as intake_state
@@ -38,7 +38,7 @@ from app.services.training_generator import (
     generate_personal_training_records,
     load_training_plan,
 )
-from app.services.renderer import html_to_pdf
+from app.services.renderer import html_contents_to_pdf, html_to_pdf
 from app.templates.loader import TemplateLoader
 
 router = APIRouter()
@@ -85,7 +85,7 @@ def _content_to_pdf(content: bytes) -> bytes:
 
 
 def _build_zip_with_pdf(manifest: PackageManifest, content_map: dict[str, bytes]) -> bytes:
-    """Build ZIP, converting unique HTML entries to PDF (serial — WeasyPrint is not thread-safe)."""
+    """Build ZIP, converting unique HTML entries to PDF (single browser session)."""
     paths: list[str] = []
     for entry in manifest.entries:
         if entry.skipped:
@@ -94,8 +94,9 @@ def _build_zip_with_pdf(manifest: PackageManifest, content_map: dict[str, bytes]
             paths.append(entry.filename)
 
     pdf_map: dict[str, bytes] = {}
-    for path in paths:
-        pdf_map[path] = _content_to_pdf(content_map[path])
+    if paths:
+        pdf_bytes_list = html_contents_to_pdf([content_map[path] for path in paths])
+        pdf_map = dict(zip(paths, pdf_bytes_list))
 
     pairs: list[tuple[str, bytes]] = []
     seen: set[str] = set()
@@ -343,6 +344,120 @@ def _run_generation(req: GenerateRequest) -> dict[str, Any]:
         "precheck_warnings": _last_precheck,
         "manifest": all_entries,
     }
+
+
+def _require_content_map() -> dict[str, bytes]:
+    if _last_manifest is None or not _last_content_map:
+        raise HTTPException(status_code=404, detail="尚未生成资料包，请先触发生成。")
+    return _last_content_map
+
+
+def _resolve_file_content(filename: str) -> bytes:
+    content_map = _require_content_map()
+    if filename not in content_map:
+        raise HTTPException(status_code=404, detail=f"文件不存在: {filename}")
+    return content_map[filename]
+
+
+def _list_preview_files() -> list[dict[str, str]]:
+    content_map = _require_content_map()
+    files: list[dict[str, str]] = []
+    seen: set[str] = set()
+    assert _last_manifest is not None
+    for entry in _last_manifest.entries:
+        if entry.skipped or not entry.filename or entry.filename in seen:
+            continue
+        if entry.filename not in content_map:
+            continue
+        seen.add(entry.filename)
+        files.append(
+            {
+                "filename": entry.filename,
+                "category": entry.category,
+                "display_name": Path(entry.filename).name,
+            }
+        )
+    return files
+
+
+def _merge_pdfs(pdf_parts: list[bytes]) -> bytes:
+    from pypdf import PdfReader, PdfWriter
+
+    writer = PdfWriter()
+    for part in pdf_parts:
+        if not part.startswith(b"%PDF"):
+            continue
+        reader = PdfReader(io.BytesIO(part))
+        for page in reader.pages:
+            writer.add_page(page)
+    buf = io.BytesIO()
+    writer.write(buf)
+    return buf.getvalue()
+
+
+class PrintRequest(BaseModel):
+    filenames: list[str]
+
+
+@router.get("/files")
+async def list_files():
+    """List generated documents available for preview and printing."""
+    files = await asyncio.to_thread(_list_preview_files)
+    return {"files": files, "total": len(files)}
+
+
+@router.get("/preview/{file_path:path}")
+async def preview_document(file_path: str):
+    """Serve HTML preview inline (for gallery iframe)."""
+    content = await asyncio.to_thread(_resolve_file_content, file_path)
+    if content.startswith(b"%PDF"):
+        return Response(content=content, media_type="application/pdf")
+    try:
+        html = content.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise HTTPException(status_code=415, detail="无法预览该文件格式") from exc
+    return HTMLResponse(content=html, headers={"Cache-Control": "no-cache"})
+
+
+@router.get("/pdf/{file_path:path}")
+async def get_single_pdf(file_path: str):
+    """Convert one document to PDF on demand."""
+    content = await asyncio.to_thread(_resolve_file_content, file_path)
+    pdf_bytes = await asyncio.to_thread(_content_to_pdf, content)
+    name = Path(file_path).name
+    if not name.lower().endswith(".pdf"):
+        name = Path(name).stem + ".pdf"
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers=attachment_disposition(name) | {"Cache-Control": "no-cache"},
+    )
+
+
+@router.post("/print")
+async def print_documents(req: PrintRequest):
+    """Merge selected documents into one PDF for browser printing."""
+    if not req.filenames:
+        raise HTTPException(status_code=400, detail="请选择至少一份文件")
+
+    content_map = _require_content_map()
+    ordered = [f for f in req.filenames if f in content_map]
+    if not ordered:
+        raise HTTPException(status_code=404, detail="所选文件均不可用")
+
+    def _build_merged() -> bytes:
+        pdfs = html_contents_to_pdf([content_map[filename] for filename in ordered])
+        merged = _merge_pdfs(pdfs)
+        if not merged:
+            raise HTTPException(status_code=422, detail="无法生成可打印的 PDF")
+        return merged
+
+    pdf_bytes = await asyncio.to_thread(_build_merged)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'inline; filename="print.pdf"', "Cache-Control": "no-cache"},
+    )
 
 
 @router.get("/manifest")

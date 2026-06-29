@@ -39,4 +39,18 @@ export interface ManifestEntry {
   missing_keys: string[]
 }
 
+export interface PreviewFile {
+  filename: string
+  category: string
+  display_name: string
+}
+
+export function previewUrl(filename: string) {
+  return `${API}/generate/preview/${encodeURIComponent(filename)}`
+}
+
+export function pdfUrl(filename: string) {
+  return `${API}/generate/pdf/${encodeURIComponent(filename)}`
+}
+
 export { apiFetch, API }

@@ -1,9 +1,10 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>年培训计划</title><style>
-@page { size: A4; margin: 12mm; }
+@page { size: A4 landscape; margin: 8mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
 body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
 .preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.preview-note.landscape { width: 297mm; }
 .page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
 
 .page.fill-page { display: flex; flex-direction: column; }
@@ -22,14 +23,19 @@ td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; w
 .photo-box { height: 32mm; vertical-align: middle; }
 @media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
 @media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page.landscape { width: 297mm; min-height: 210mm; } .page:last-child { page-break-after: auto; } }
-</style></head><body><div class="preview-note">A4 黑白打印预览 · 18培训计划/培训计划/2025 年培训计划表.xls::2024年培训计划</div>
-<section class="page landscape"><table>
+
+.page.landscape { padding: 8mm 10mm !important; }
+.plan-table { font-size: 9pt; }
+.plan-table td, .plan-table th { padding: 0.8mm 1mm; line-height: 1.25; }
+.plan-table .month-col { width: 4.08%; padding: 0.5mm 0.2mm; font-size: 8pt; white-space: nowrap; }
+</style></head><body><div class="preview-note landscape">A4 横向黑白打印预览 · 18培训计划/培训计划/2025 年培训计划表.xls::2024年培训计划</div>
+<section class="page landscape"><table class="plan-table">
 <colgroup>
-<col style="width:4%"><col style="width:14%"><col style="width:10%"><col style="width:5%">
-<col style="width:5%"><col style="width:8%"><col style="width:7%"><col style="width:7%">
-<col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
-<col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
-<col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+<col style="width:3%"><col style="width:12%"><col style="width:8%"><col style="width:4%">
+<col style="width:5%"><col style="width:7%"><col style="width:6%"><col style="width:6%">
+<col class="month-col"><col class="month-col"><col class="month-col"><col class="month-col">
+<col class="month-col"><col class="month-col"><col class="month-col"><col class="month-col">
+<col class="month-col"><col class="month-col"><col class="month-col"><col class="month-col">
 </colgroup>
 <tr><td colspan="20" class="center bold" style="font-size:14pt">{{document.year}}年度教育培训计划表</td></tr>
 <tr><td colspan="20">{{enterprise.name}}</td></tr>
@@ -41,9 +47,9 @@ td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; w
 </tr>
 <tr>
   <td colspan="8">&nbsp;</td>
-  <th class="center">1月</th><th class="center">2月</th><th class="center">3月</th><th class="center">4月</th>
-  <th class="center">5月</th><th class="center">6月</th><th class="center">7月</th><th class="center">8月</th>
-  <th class="center">9月</th><th class="center">10月</th><th class="center">11月</th><th class="center">12月</th>
+  <th class="center month-col">1月</th><th class="center month-col">2月</th><th class="center month-col">3月</th><th class="center month-col">4月</th>
+  <th class="center month-col">5月</th><th class="center month-col">6月</th><th class="center month-col">7月</th><th class="center month-col">8月</th>
+  <th class="center month-col">9月</th><th class="center month-col">10月</th><th class="center month-col">11月</th><th class="center month-col">12月</th>
 </tr>
 <!-- LIST:annual_plan_rows -->
 <tr>
@@ -55,18 +61,18 @@ td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; w
   <td class="center">{{training.organizer}}</td>
   <td class="center">{{training.trainer}}</td>
   <td class="center">{{training.assessment_method}}</td>
-  <td class="center">{{training.month_1}}</td>
-  <td class="center">{{training.month_2}}</td>
-  <td class="center">{{training.month_3}}</td>
-  <td class="center">{{training.month_4}}</td>
-  <td class="center">{{training.month_5}}</td>
-  <td class="center">{{training.month_6}}</td>
-  <td class="center">{{training.month_7}}</td>
-  <td class="center">{{training.month_8}}</td>
-  <td class="center">{{training.month_9}}</td>
-  <td class="center">{{training.month_10}}</td>
-  <td class="center">{{training.month_11}}</td>
-  <td class="center">{{training.month_12}}</td>
+  <td class="center month-col">{{training.month_1}}</td>
+  <td class="center month-col">{{training.month_2}}</td>
+  <td class="center month-col">{{training.month_3}}</td>
+  <td class="center month-col">{{training.month_4}}</td>
+  <td class="center month-col">{{training.month_5}}</td>
+  <td class="center month-col">{{training.month_6}}</td>
+  <td class="center month-col">{{training.month_7}}</td>
+  <td class="center month-col">{{training.month_8}}</td>
+  <td class="center month-col">{{training.month_9}}</td>
+  <td class="center month-col">{{training.month_10}}</td>
+  <td class="center month-col">{{training.month_11}}</td>
+  <td class="center month-col">{{training.month_12}}</td>
 </tr>
 <!-- /LIST -->
 <tr>

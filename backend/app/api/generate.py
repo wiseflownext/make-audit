@@ -44,10 +44,18 @@ from app.templates.loader import TemplateLoader
 router = APIRouter()
 
 
-def _to_content_bytes(r: "DocGenResult", cache: dict[int, bytes] | None = None) -> bytes:
+def _content_cache_key(r: "DocGenResult") -> tuple[str, str]:
+    """Stable cache key — never use ``id(r)`` (Python reuses object ids after GC)."""
+    return (r.template_id, r.output_filename)
+
+
+def _to_content_bytes(
+    r: "DocGenResult",
+    cache: dict[tuple[str, str], bytes] | None = None,
+) -> bytes:
     """Return renderable bytes for ZIP storage (HTML during generate; PDF at download)."""
     if cache is not None:
-        key = id(r)
+        key = _content_cache_key(r)
         if key in cache:
             return cache[key]
     if r.pdf_bytes:
@@ -57,7 +65,7 @@ def _to_content_bytes(r: "DocGenResult", cache: dict[int, bytes] | None = None) 
     else:
         out = b""
     if cache is not None:
-        cache[id(r)] = out
+        cache[_content_cache_key(r)] = out
     return out
 
 
@@ -195,7 +203,7 @@ def _run_generation(req: GenerateRequest) -> dict[str, Any]:
 
     all_entries: list[dict] = []
     content_map: dict[str, bytes] = {}
-    pdf_cache: dict[int, bytes] = {}
+    pdf_cache: dict[tuple[str, str], bytes] = {}
 
     if roster_result.output_filename:
         roster_path = f"公司级文件/员工档案/{roster_result.output_filename}"
@@ -283,7 +291,6 @@ def _run_generation(req: GenerateRequest) -> dict[str, Any]:
             satisfaction,
             [],  # attendance records are handled at company level
             emp_personal,
-            company_docs=satisfaction_report_results if emp == employees[0] else None,
         )
 
         for entry in manifest.entries:
@@ -295,7 +302,6 @@ def _run_generation(req: GenerateRequest) -> dict[str, Any]:
                 personal_training_results,
                 incentive_results,
                 satisfaction_results,
-                satisfaction_report_results,
                 [roster_result],
             ]:
                 if matched:
@@ -303,10 +309,7 @@ def _run_generation(req: GenerateRequest) -> dict[str, Any]:
                 for r in res_list:
                     if not r.output_filename:
                         continue
-                    candidates = [r.output_filename]
-                    if "分析报告" in r.output_filename:
-                        candidates.append(f"公司级文件/20员工激励/{r.output_filename}")
-                    if entry.filename.endswith(r.output_filename) or entry.filename in candidates:
+                    if entry.filename.endswith(r.output_filename):
                         content_map[entry.filename] = _to_content_bytes(r, pdf_cache)
                         matched = True
                         break

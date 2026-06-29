@@ -45,24 +45,27 @@ td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; w
 </div>
 <table class="form-table">
 <colgroup>
-<col style="width:8%"><col style="width:10%"><col style="width:10%"><col style="width:8%">
-<col style="width:8%"><col style="width:10%"><col style="width:10%"><col style="width:12%">
-<col style="width:12%"><col style="width:12%">
+<col style="width:9%"><col style="width:11%"><col style="width:10%"><col style="width:8%">
+<col style="width:9%"><col style="width:10%"><col style="width:10%"><col style="width:11%">
+<col style="width:11%"><col style="width:11%">
 </colgroup>
 <tr>
-  <td rowspan="3" class="center">姓名</td>
-  <td rowspan="2" class="center photo-box">贴照片处</td>
+  <td class="center bold">姓名</td>
+  <td class="center">{{employee.name}}</td>
   <td class="center">岗位类别</td><td colspan="2" class="center">{{employee.position_category}}</td>
   <td colspan="2" class="center">入厂时间</td><td colspan="3" class="center">{{employee.hire_date}}</td>
 </tr>
 <tr>
+  <td class="center bold">签名</td>
+  <td class="center">{{employee.signature}}</td>
   <td class="center">性别</td><td colspan="2" class="center">{{employee.gender}}</td>
   <td colspan="2" class="center">任职部门</td><td colspan="3" class="center">{{employee.department_name}}</td>
 </tr>
 <tr>
-  <td class="center">&nbsp;</td>
+  <td class="center bold">学历</td>
+  <td class="center">{{employee.education}}</td>
   <td class="center">年龄</td><td colspan="2" class="center">&nbsp;</td>
-  <td colspan="2" class="center">学历</td><td colspan="3" class="center">{{employee.education}}</td>
+  <td colspan="5" class="center">&nbsp;</td>
 </tr>
 <tr>
   <td colspan="2" class="center">培训项目</td><td colspan="3" class="center">培训/考核内容</td>

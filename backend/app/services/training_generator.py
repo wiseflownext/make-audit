@@ -422,28 +422,41 @@ def build_sessions(
 # ---------------------------------------------------------------------------
 
 TMPL_ATTENDANCE = "18培训计划__培训记录__2024年培训记录-空白表单-xlsx__培训记录"
-MIN_ATTENDANCE_ROWS = 14
+MIN_ATTENDANCE_ROWS = 10
 
 
 def build_attendance_list_data(
     attendees: list[Employee],
     sig_store: SignatureStore | None = None,
 ) -> dict[str, list[ContextMap]]:
-    """Build attendance rows for a training session record (min 14 rows)."""
+    """Build attendance rows for a training session record (min 14 rows).
+
+    When an employee has an image signature in *sig_store*:
+    - The name cell shows the signature image instead of plain text.
+    - 成绩首试 and 成果合格 are marked with √.
+    """
     empty_exam = {"first_score": "", "retake_score": "", "passed": "", "retrain": ""}
     rows: list[ContextMap] = []
     for emp in attendees:
         emp_ctx = emp.to_namespace_dict()
+        has_img_sig = sig_store is not None and sig_store.get(emp.name) is not None
         if sig_store:
             emp_ctx["signature"] = signature_render_value(emp.name, sig_store)
+        # Name cell in the sign-in column: use signature image when available
+        emp_ctx["sign_name"] = emp_ctx["signature"] if sig_store else emp.name
+        # Mark exam results only when employee has a real (image) signature
+        exam = dict(empty_exam)
+        if has_img_sig:
+            exam["first_score"] = "√"
+            exam["passed"] = "√"
         rows.append({
             "employee": emp_ctx,
-            "training": {"exam": dict(empty_exam)},
+            "training": {"exam": exam},
         })
 
     while len(rows) < MIN_ATTENDANCE_ROWS:
         rows.append({
-            "employee": {"name": "", "department_name": ""},
+            "employee": {"name": "", "department_name": "", "sign_name": ""},
             "training": {"exam": dict(empty_exam)},
         })
     return {"attendance_rows": rows}
@@ -455,19 +468,26 @@ def generate_attendance_records(
     enterprise: dict[str, Any],
     sig_store: SignatureStore,
 ) -> list[DocGenResult]:
-    """Generate one attendance record HTML/PDF per :class:`TrainingSession`."""
+    """Generate one attendance record HTML/PDF per :class:`TrainingSession`.
+
+    Sessions of plan_type ``new_employee`` (员工入司培训课程计划) are excluded
+    because those are handled via the onboarding training evaluation form.
+    """
     tmpl = loader.get_by_id(TMPL_ATTENDANCE)
     results: list[DocGenResult] = []
 
     for session in sessions:
+        if session.plan_type == "new_employee":
+            continue
+        instructor_sig = signature_render_value(session.trainer, sig_store) if session.trainer else session.trainer
         ctx: ContextMap = {
             "enterprise": enterprise,
             "training": {
                 "course_name": session.course_name,
-                "instructor_name": session.trainer,
+                "instructor_name": instructor_sig,
                 "period": session.scheduled_date.strftime("%Y年%m月%d日"),
                 "duration": session.duration,
-                "attendance": f"{len(session.attendees)}/{len(session.attendees)}",
+                "attendance": f"应到{len(session.attendees)}人/实到{len(session.attendees)}人",
                 "location": session.location,
                 "assessment_method": session.assessment_method,
                 "content": session.content,

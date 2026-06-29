@@ -47,23 +47,45 @@ class SignatureStore:
 # ---------------------------------------------------------------------------
 
 
+def _try_import_rembg() -> Any | None:
+    """Return the rembg module if usable, otherwise None."""
+    import sys
+    import os
+
+    try:
+        # rembg prints to stderr and may call sys.exit when onnxruntime is missing;
+        # redirect stderr temporarily to suppress the noise.
+        devnull = open(os.devnull, "w")
+        old_stderr = sys.stderr
+        sys.stderr = devnull
+        try:
+            import rembg as _rembg  # type: ignore[import]
+        finally:
+            sys.stderr = old_stderr
+            devnull.close()
+        return _rembg
+    except (ImportError, SystemExit, Exception):
+        return None
+
+
+_rembg_module: Any | None = _try_import_rembg()
+if _rembg_module is None:
+    logger.warning("rembg not available; will use Pillow white-threshold background removal.")
+
+
 def remove_background(image_bytes: bytes) -> bytes:
     """Remove background from *image_bytes* and return transparent PNG bytes.
 
     Uses ``rembg`` when available; falls back to simple white-threshold removal
-    via Pillow when rembg is not installed.
+    via Pillow when rembg is not installed or lacks onnxruntime.
     """
-    try:
-        import rembg  # type: ignore[import]
-
-        result = rembg.remove(image_bytes)
-        return result  # rembg returns PNG bytes
-    except ImportError:
-        logger.warning("rembg not installed; using Pillow white-threshold background removal.")
-        return _pillow_remove_white(image_bytes)
-    except Exception as exc:
-        logger.warning("rembg failed (%s); falling back to Pillow.", exc)
-        return _pillow_remove_white(image_bytes)
+    if _rembg_module is not None:
+        try:
+            result = _rembg_module.remove(image_bytes)
+            return result  # rembg returns PNG bytes
+        except Exception as exc:
+            logger.warning("rembg failed (%s); falling back to Pillow.", exc)
+    return _pillow_remove_white(image_bytes)
 
 
 def _pillow_remove_white(image_bytes: bytes, threshold: int = 240) -> bytes:

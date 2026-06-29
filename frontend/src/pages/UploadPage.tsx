@@ -2,6 +2,47 @@ import { useState, useEffect } from 'react'
 import { apiFetch, API } from '../api'
 import type { Employee } from '../api'
 
+function SignLinkBlock() {
+  const signUrl = `${window.location.origin}/sign`
+  const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(signUrl)}`
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+      <img
+        src={qrApiUrl}
+        alt="手机签名二维码"
+        style={{ width: 100, height: 100, borderRadius: 6, border: '1px solid #bfdbfe', flexShrink: 0 }}
+        onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
+      />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <p style={{ margin: '0 0 6px', fontSize: '0.82rem', color: '#6b7280' }}>
+          手机和电脑需在同一局域网内
+        </p>
+        <a
+          href="/sign"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-block',
+            padding: '8px 16px',
+            background: '#2563eb',
+            color: '#fff',
+            borderRadius: 6,
+            textDecoration: 'none',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+          }}
+        >
+          📱 打开手机签名页面
+        </a>
+        <p style={{ margin: '6px 0 0', fontSize: '0.78rem', color: '#9ca3af', wordBreak: 'break-all' }}>
+          {signUrl}
+        </p>
+      </div>
+    </div>
+  )
+}
+
 type EnterpriseInfo = {
   name: string
   short_name?: string
@@ -247,6 +288,15 @@ export default function UploadPage() {
       {ready && employees.length > 0 && (
         <section className="card card-action">
           <p>企业资料与花名册均已就绪，可前往 <strong>下载资料包</strong> 页面触发生成。</p>
+          <div style={{ marginTop: '1rem', padding: '1rem', background: '#eff6ff', borderRadius: 8, border: '1px solid #bfdbfe' }}>
+            <p style={{ margin: '0 0 0.75rem', fontSize: '0.9rem', color: '#1e40af', fontWeight: 500 }}>
+              📱 手机签名收集
+            </p>
+            <p style={{ margin: '0 0 0.75rem', fontSize: '0.85rem', color: '#3b82f6' }}>
+              用手机扫描二维码或访问以下链接，让员工直接在手机上手写签名：
+            </p>
+            <SignLinkBlock />
+          </div>
         </section>
       )}
     </div>

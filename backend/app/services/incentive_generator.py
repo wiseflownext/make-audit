@@ -9,13 +9,20 @@ from __future__ import annotations
 import json
 import logging
 import random
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
 from app.models.employee import Employee
-from app.services.hr_generator import DocGenResult, _add_enterprise, _pre_check_and_render
-from app.services.signature import SignatureStore
+from app.services.hr_generator import (
+    DocGenResult,
+    _add_enterprise,
+    _pre_check_and_render,
+    find_department_head_name,
+    find_general_manager_name,
+    find_hr_manager_name,
+)
+from app.services.signature import SignatureStore, signature_render_value
 from app.templates.loader import TemplateLoader
 
 logger = logging.getLogger(__name__)
@@ -84,9 +91,16 @@ def _build_context(
     incentive: dict[str, Any],
     seq: int,
     enterprise: dict[str, Any],
+    employees: list[Employee] | None = None,
+    sig_store: SignatureStore | None = None,
 ) -> dict[str, Any]:
+    emp_ctx = emp.to_namespace_dict()
+    # Add employee's signature to context
+    if sig_store is not None:
+        emp_ctx["signature"] = signature_render_value(emp.name, sig_store)
+
     ctx: dict[str, Any] = {
-        "employee": emp.to_namespace_dict(),
+        "employee": emp_ctx,
         "document": {
             "date": _fmt_date(doc_date),
             "year": str(doc_date.year),
@@ -95,6 +109,22 @@ def _build_context(
         },
         "incentive": dict(incentive),
     }
+
+    # Fill in personnel for dissatisfaction corrective action form
+    if employees is not None and "dissatisfaction_description" in incentive:
+        dept_head = find_department_head_name(emp.department_name, employees) or emp.name
+        hr_mgr = find_hr_manager_name(employees) or find_general_manager_name(employees) or emp.name
+        ctx["incentive"].update({
+            "analyst_name": signature_render_value(dept_head, sig_store) if sig_store else dept_head,
+            "analyst_date": _fmt_date(doc_date + timedelta(days=3)),
+            "action_owner": signature_render_value(dept_head, sig_store) if sig_store else dept_head,
+            "action_date": _fmt_date(doc_date + timedelta(days=7)),
+            "implementer_name": signature_render_value(emp.name, sig_store) if sig_store else emp.name,
+            "implementer_date": _fmt_date(doc_date + timedelta(days=14)),
+            "verifier_name": signature_render_value(hr_mgr, sig_store) if sig_store else hr_mgr,
+            "verifier_date": _fmt_date(doc_date + timedelta(days=21)),
+        })
+
     _add_enterprise(ctx, enterprise)
     return ctx
 
@@ -130,13 +160,16 @@ def generate_incentive_forms(
 
         if idx < len(suggestion_employees):
             ctx = _build_context(
-                suggestion_employees[idx], doc_date, suggestion, seq, enterprise
+                suggestion_employees[idx], doc_date, suggestion, seq, enterprise,
+                sig_store=sig_store,
             )
             results.append(_pre_check_and_render(tmpl_suggestion, ctx))
 
         if idx < len(dissatisfaction_employees):
             ctx = _build_context(
-                dissatisfaction_employees[idx], doc_date, dissatisfaction, seq, enterprise
+                dissatisfaction_employees[idx], doc_date, dissatisfaction, seq, enterprise,
+                employees=employees,
+                sig_store=sig_store,
             )
             results.append(_pre_check_and_render(tmpl_dissatisfaction, ctx))
 

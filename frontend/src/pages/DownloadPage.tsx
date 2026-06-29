@@ -1,8 +1,17 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState, useRef } from 'react'
 import DocumentGallery, { DocumentLightbox } from '../components/DocumentGallery'
 import { apiFetch, API, type ManifestEntry, type PreviewFile } from '../api'
 
 type ViewMode = 'gallery' | 'list'
+
+interface DownloadProgress {
+  done: number
+  total: number
+  current: string
+  started: boolean
+  finished: boolean
+  error: string
+}
 
 function toPreviewFiles(manifest: ManifestEntry[]): PreviewFile[] {
   const seen = new Set<string>()
@@ -26,10 +35,12 @@ export default function DownloadPage() {
   const [summary, setSummary] = useState<{ total: number; generated: number } | null>(null)
   const [msg, setMsg] = useState('')
   const [downloading, setDownloading] = useState(false)
+  const [dlProgress, setDlProgress] = useState<DownloadProgress | null>(null)
   const [printing, setPrinting] = useState(false)
   const [viewMode, setViewMode] = useState<ViewMode>('gallery')
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const sseRef = useRef<EventSource | null>(null)
 
   const previewFiles = useMemo(
     () => (manifest ? toPreviewFiles(manifest) : []),
@@ -57,15 +68,39 @@ export default function DownloadPage() {
       setSummary({ total: data.total, generated: data.generated })
       setWarnings(data.precheck_warnings || [])
       setMsg(`✓ 生成完成：共 ${data.total} 份，成功 ${data.generated} 份`)
-    } catch (e: any) {
-      setMsg('✗ ' + e.message)
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      setMsg('✗ ' + msg)
     }
     setGenerating(false)
   }
 
   async function downloadZip() {
     setDownloading(true)
-    setMsg('⏳ 正在转换 PDF 并打包，请稍候…')
+    setDlProgress(null)
+    setMsg('⏳ 正在转换 PDF 并打包，这可能需要几分钟，请勿关闭页面…')
+
+    // Open SSE progress stream first
+    if (sseRef.current) sseRef.current.close()
+    const sse = new EventSource(`${API}/generate/download-progress`)
+    sseRef.current = sse
+    sse.onmessage = (e) => {
+      try {
+        const p: DownloadProgress = JSON.parse(e.data)
+        setDlProgress(p)
+        if (p.finished || p.error) {
+          sse.close()
+          sseRef.current = null
+        }
+      } catch {
+        // ignore parse errors
+      }
+    }
+    sse.onerror = () => {
+      sse.close()
+      sseRef.current = null
+    }
+
     try {
       const res = await fetch(`${API}/generate/download`)
       if (!res.ok) {
@@ -77,10 +112,16 @@ export default function DownloadPage() {
       Object.assign(document.createElement('a'), { href: url, download: 'HR审核资料包.zip' }).click()
       URL.revokeObjectURL(url)
       setMsg('✓ ZIP 资料包已下载')
-    } catch (e: any) {
-      setMsg('✗ 下载失败: ' + e.message)
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      setMsg('✗ 下载失败: ' + msg)
+    } finally {
+      if (sseRef.current) {
+        sseRef.current.close()
+        sseRef.current = null
+      }
+      setDownloading(false)
     }
-    setDownloading(false)
   }
 
   const toggleFile = useCallback((filename: string) => {
@@ -142,8 +183,9 @@ export default function DownloadPage() {
         document.body.removeChild(iframe)
         URL.revokeObjectURL(url)
       }, 60_000)
-    } catch (e: any) {
-      setMsg('✗ 打印失败: ' + e.message)
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e)
+      setMsg('✗ 打印失败: ' + msg)
     }
     setPrinting(false)
   }
@@ -172,6 +214,24 @@ export default function DownloadPage() {
           )}
         </div>
         {msg && <p className={msg.startsWith('✓') ? 'msg-ok' : 'msg-err'}>{msg}</p>}
+
+        {downloading && dlProgress && dlProgress.total > 0 && (
+          <div className="dl-progress-wrap">
+            <div className="dl-progress-info">
+              <span>正在转换 PDF：{dlProgress.done} / {dlProgress.total}</span>
+              {dlProgress.current && (
+                <span className="dl-progress-current">当前：{dlProgress.current}</span>
+              )}
+            </div>
+            <div className="dl-progress-bar-bg">
+              <div
+                className="dl-progress-bar-fill"
+                style={{ width: `${Math.round((dlProgress.done / dlProgress.total) * 100)}%` }}
+              />
+            </div>
+            <p className="hint">正在转换 PDF，这可能需要几分钟，请勿关闭页面</p>
+          </div>
+        )}
 
         {summary && (
           <div className="summary-chips">

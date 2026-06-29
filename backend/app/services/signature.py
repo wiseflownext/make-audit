@@ -21,16 +21,60 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 
+_SIGNATURES_DIR = Path(__file__).parent.parent.parent / "data" / "signatures"
+
+
 class SignatureStore:
-    """Thread-safe in-memory store mapping employee name → transparent PNG bytes."""
+    """In-memory store mapping employee name → transparent PNG bytes, backed by disk."""
 
     def __init__(self) -> None:
         self._store: dict[str, bytes] = {}
+        self._load_from_disk()
+
+    def _sig_path(self, employee_name: str) -> Path:
+        safe = employee_name.strip().replace("/", "_").replace("\\", "_")
+        return _SIGNATURES_DIR / f"{safe}.png"
+
+    def _load_from_disk(self) -> None:
+        """Load all existing signature files from disk into memory."""
+        try:
+            _SIGNATURES_DIR.mkdir(parents=True, exist_ok=True)
+            for sig_file in _SIGNATURES_DIR.glob("*.png"):
+                name = sig_file.stem
+                try:
+                    self._store[name] = sig_file.read_bytes()
+                except Exception as exc:
+                    logger.warning("Failed to load signature %s: %s", sig_file, exc)
+        except Exception as exc:
+            logger.warning("Failed to load signatures from disk: %s", exc)
+
+    def _save_to_disk(self, employee_name: str, png_bytes: bytes) -> None:
+        try:
+            _SIGNATURES_DIR.mkdir(parents=True, exist_ok=True)
+            self._sig_path(employee_name).write_bytes(png_bytes)
+        except Exception as exc:
+            logger.warning("Failed to save signature for %s: %s", employee_name, exc)
+
+    def _delete_from_disk(self, employee_name: str) -> None:
+        try:
+            path = self._sig_path(employee_name)
+            if path.exists():
+                path.unlink()
+        except Exception as exc:
+            logger.warning("Failed to delete signature for %s: %s", employee_name, exc)
 
     def add(self, employee_name: str, image_bytes: bytes, filename: str = "") -> None:
         """Process *image_bytes* (any PIL-supported format) and store as transparent PNG."""
         png = remove_background(image_bytes)
-        self._store[employee_name.strip()] = png
+        name = employee_name.strip()
+        self._store[name] = png
+        self._save_to_disk(name, png)
+
+    def store_raw(self, employee_name: str, png_bytes: bytes) -> None:
+        """Store raw PNG bytes directly (e.g. from canvas pad) and persist to disk."""
+        name = employee_name.strip()
+        self._store[name] = png_bytes
+        self._save_to_disk(name, png_bytes)
 
     def get(self, employee_name: str) -> bytes | None:
         return self._store.get(employee_name.strip())
@@ -38,8 +82,25 @@ class SignatureStore:
     def names(self) -> list[str]:
         return list(self._store.keys())
 
+    def delete(self, employee_name: str) -> None:
+        name = employee_name.strip()
+        self._store.pop(name, None)
+        self._delete_from_disk(name)
+
     def clear(self) -> None:
+        for name in list(self._store.keys()):
+            self._delete_from_disk(name)
         self._store.clear()
+
+    def export_zip(self) -> bytes:
+        """Export all signatures as a ZIP archive."""
+        import io
+        import zipfile
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            for name, png in self._store.items():
+                zf.writestr(f"{name}.png", png)
+        return buf.getvalue()
 
 
 # ---------------------------------------------------------------------------

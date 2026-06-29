@@ -1,15 +1,22 @@
+import { useState } from 'react'
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import UploadPage from './pages/UploadPage'
 import DownloadPage from './pages/DownloadPage'
 import TemplatesPage from './pages/TemplatesPage'
 import TemplatePreviewPage from './pages/TemplatePreviewPage'
 import SignaturePadPage from './pages/SignaturePadPage'
+import LoginPage, { isLoggedIn } from './pages/LoginPage'
 import './App.css'
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn)
   const { pathname } = useLocation()
   const isStandalonePreview = pathname.startsWith('/preview/')
   const isSignPage = pathname === '/sign'
+
+  if (!loggedIn) {
+    return <LoginPage onLogin={() => setLoggedIn(true)} />
+  }
 
   return (
     <div className={`app${isStandalonePreview ? ' app-preview-only' : ''}`}>

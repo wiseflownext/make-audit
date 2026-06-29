@@ -3,6 +3,9 @@ from __future__ import annotations
 
 import asyncio
 import io
+import json
+import time
+from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -42,6 +45,24 @@ from app.services.renderer import html_contents_to_pdf, html_to_pdf
 from app.templates.loader import TemplateLoader
 
 router = APIRouter()
+
+
+# ---------------------------------------------------------------------------
+# Download progress tracking
+# ---------------------------------------------------------------------------
+
+@dataclass
+class _DownloadProgress:
+    total: int = 0
+    done: int = 0
+    current: str = ""
+    started: bool = False
+    finished: bool = False
+    error: str = ""
+    started_at: float = field(default_factory=time.time)
+
+
+_download_progress = _DownloadProgress()
 
 
 def _content_cache_key(r: "DocGenResult") -> tuple[str, str]:
@@ -85,7 +106,9 @@ def _content_to_pdf(content: bytes) -> bytes:
 
 
 def _build_zip_with_pdf(manifest: PackageManifest, content_map: dict[str, bytes]) -> bytes:
-    """Build ZIP, converting unique HTML entries to PDF (single browser session)."""
+    """Build ZIP, converting unique HTML entries to PDF one at a time, tracking progress."""
+    global _download_progress
+
     paths: list[str] = []
     for entry in manifest.entries:
         if entry.skipped:
@@ -93,10 +116,20 @@ def _build_zip_with_pdf(manifest: PackageManifest, content_map: dict[str, bytes]
         if entry.filename in content_map and entry.filename not in paths:
             paths.append(entry.filename)
 
+    _download_progress.total = len(paths)
+    _download_progress.done = 0
+    _download_progress.started = True
+    _download_progress.finished = False
+    _download_progress.error = ""
+
     pdf_map: dict[str, bytes] = {}
-    if paths:
-        pdf_bytes_list = html_contents_to_pdf([content_map[path] for path in paths])
-        pdf_map = dict(zip(paths, pdf_bytes_list))
+    for path in paths:
+        _download_progress.current = Path(path).name
+        content = content_map[path]
+        # Convert single file via batch helper (reuses one browser session)
+        results = html_contents_to_pdf([content])
+        pdf_map[path] = results[0]
+        _download_progress.done += 1
 
     pairs: list[tuple[str, bytes]] = []
     seen: set[str] = set()
@@ -108,7 +141,11 @@ def _build_zip_with_pdf(manifest: PackageManifest, content_map: dict[str, bytes]
             continue
         seen.add(entry.filename)
         pairs.append((entry.filename, content))
-    return pack_to_zip(pairs)
+
+    zip_bytes = pack_to_zip(pairs)
+    _download_progress.finished = True
+    _download_progress.current = ""
+    return zip_bytes
 
 
 TEMPLATE_BASE = Path(__file__).parent.parent.parent.parent / "template"
@@ -474,9 +511,40 @@ async def get_manifest():
     }
 
 
+@router.get("/download-progress")
+async def download_progress_sse():
+    """SSE endpoint: stream download/conversion progress every 500ms."""
+
+    async def event_generator():
+        while True:
+            p = _download_progress
+            data = json.dumps({
+                "done": p.done,
+                "total": p.total,
+                "current": p.current,
+                "started": p.started,
+                "finished": p.finished,
+                "error": p.error,
+            }, ensure_ascii=False)
+            yield f"data: {data}\n\n"
+            if p.finished or p.error:
+                break
+            await asyncio.sleep(0.5)
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
 @router.get("/download")
 async def download_zip():
     """Download the generated audit package as a ZIP file."""
+    global _download_progress
     if _last_manifest is None or not _last_content_map:
         raise HTTPException(status_code=404, detail="尚未生成资料包，请先触发生成。")
     try:
@@ -484,7 +552,12 @@ async def download_zip():
     except EmptyPackageError as exc:
         raise HTTPException(status_code=422, detail=str(exc))
 
-    zip_bytes = await asyncio.to_thread(_build_zip_with_pdf, _last_manifest, _last_content_map)
+    _download_progress = _DownloadProgress()
+    try:
+        zip_bytes = await asyncio.to_thread(_build_zip_with_pdf, _last_manifest, _last_content_map)
+    except Exception as exc:
+        _download_progress.error = str(exc)
+        raise HTTPException(status_code=500, detail=f"打包失败: {exc}")
     return Response(
         content=zip_bytes,
         media_type="application/zip",

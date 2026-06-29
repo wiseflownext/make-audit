@@ -1,0 +1,231 @@
+{
+  "meta": {
+    "description": "合理化建议表与员工不满意项目纠正和预防措施表模板数据，各10条按序一一对应",
+    "pair_count": 10,
+    "employee_pool": "regular_non_manager",
+    "employee_selection": "random_without_replacement",
+    "read_mode": "sequential"
+  },
+  "pairs": [
+    {
+      "seq": 1,
+      "document_date": "2024-02-18",
+      "suggestion": {
+        "suggestion_category": "现场管理",
+        "suggestion_topic": "机加工区域刀具摆放标准化",
+        "suggestion_current_state": "目前机加工现场刀具混放，换刀时需在各工位间寻找，平均换刀时间约8分钟，且存在拿错规格刀具的风险。",
+        "suggestion_content": "建议在每台设备旁设置刀具定置盒，按工序编号贴标签，并绘制刀具摆放示意图。每日班前由班组长检查定置情况。",
+        "suggestion_expected_effect": "预计换刀时间缩短至3分钟以内，减少刀具错用导致的废品率，提升现场5S水平。",
+        "suggestion_review_opinion": "建议切实可行，同意采纳。由生产部负责在3月底前完成定置盒配置及标识，综管部跟踪验证效果。"
+      },
+      "dissatisfaction": {
+        "process_name": "生产过程",
+        "nonconformity_clause": "8.5.1.1 生产和服务提供的控制",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "满意度调查中多名员工反映机加工现场刀具、量具摆放混乱，找工具耗时长，影响换线效率，现场5S执行不到位。",
+        "root_cause_analysis": "1. 现场缺乏统一的定置管理标准；2. 班组长日常检查频次不足；3. 新员工入岗培训中对现场定置要求强调不够。",
+        "corrective_action": "1. 制定《机加工现场定置管理规范》；2. 配置定置盒及标识；3. 将定置检查纳入班前会必查项；4. 在岗位培训中增加定置管理内容。",
+        "corrective_implementation": "已完成定置盒采购及安装，全部28台设备旁均已配置。班组长每日班前检查并记录，2月份定置合格率达96%。",
+        "corrective_verification": "经现场抽查及员工回访，找工具时间明显缩短，员工对现场整洁度满意度提升。纠正措施有效，予以关闭。"
+      }
+    },
+    {
+      "seq": 2,
+      "document_date": "2024-03-05",
+      "suggestion": {
+        "suggestion_category": "质量改进",
+        "suggestion_topic": "来料检验记录电子化",
+        "suggestion_current_state": "来料检验目前使用纸质记录，检验数据需二次录入系统，存在漏录、错录情况，追溯查询不便。",
+        "suggestion_content": "建议在IQC检验台配备平板电脑，开发或引入简易检验记录模块，检验完成后直接上传系统并自动生成批次追溯码。",
+        "suggestion_expected_effect": "消除二次录入环节，提高数据准确性，来料批次追溯时间由30分钟缩短至5分钟以内。",
+        "suggestion_review_opinion": "同意采纳。由质量部牵头，信息部配合，4月底前完成试点，5月全面推广。"
+      },
+      "dissatisfaction": {
+        "process_name": "来料检验",
+        "nonconformity_clause": "8.5.6 更改的控制 / 7.5.3 成文信息的控制",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "员工反映来料检验记录填写繁琐，纸质记录与系统数据不一致，出现批次追溯困难的情况。",
+        "root_cause_analysis": "1. 检验记录仍为纸质表单，与ERP系统未对接；2. 检验员手工誊录易出错；3. 缺乏实时数据校验机制。",
+        "corrective_action": "1. 引入IQC电子化检验记录；2. 检验数据与ERP实时同步；3. 修订《来料检验作业指导书》中记录要求。",
+        "corrective_implementation": "已在IQC区域部署2台检验终端，完成与ERP接口联调。3月份电子化记录占比达85%，纸质记录仅作备份。",
+        "corrective_verification": "抽查10批次来料记录，系统与实物追溯一致，无错录漏录。员工反馈录入工作量减少约60%。措施有效。"
+      }
+    },
+    {
+      "seq": 3,
+      "document_date": "2024-03-22",
+      "suggestion": {
+        "suggestion_category": "安全环保",
+        "suggestion_topic": "冲压车间噪声防护改进",
+        "suggestion_current_state": "冲压区域噪声值约85-90dB，虽配发耳塞但部分员工未正确佩戴，长期可能影响听力健康。",
+        "suggestion_content": "建议在冲压设备周围加装隔音挡板，入口设置噪声警示标识，并每月开展一次耳塞正确佩戴培训及检查。",
+        "suggestion_expected_effect": "噪声值预计降低5-8dB，员工职业健康风险降低，职业健康体检合格率保持100%。",
+        "suggestion_review_opinion": "涉及职业健康安全，优先采纳。由EHS专员负责隔音挡板方案评估，生产部配合实施，6月底前完成。"
+      },
+      "dissatisfaction": {
+        "process_name": "职业健康安全管理",
+        "nonconformity_clause": "6.1.2 环境因素 / 7.4 沟通",
+        "nonconformity_severity": "轻微",
+        "dissatisfaction_description": "冲压车间员工在满意度调查中反映噪声较大，耳塞佩戴不舒适，部分时段未严格执行佩戴要求。",
+        "root_cause_analysis": "1. 冲压区域缺乏有效隔音措施；2. 耳塞型号单一，部分员工不适用；3. 日常监督检查力度不足。",
+        "corrective_action": "1. 评估并安装隔音挡板；2. 提供多种型号耳塞供员工选择；3. 班组长每班检查PPE佩戴情况并记录。",
+        "corrective_implementation": "已安装4组隔音挡板，噪声实测降低6dB。新增3种耳塞型号，员工自选适配。4月起纳入班前PPE检查表。",
+        "corrective_verification": "现场噪声检测达标，员工访谈确认佩戴舒适度改善。EHS月度检查无违规记录。纠正措施有效。"
+      }
+    },
+    {
+      "seq": 4,
+      "document_date": "2024-04-10",
+      "suggestion": {
+        "suggestion_category": "效率提升",
+        "suggestion_topic": "装配线物料配送节拍优化",
+        "suggestion_current_state": "装配线物料由物流员按固定时间配送，遇换型或异常时经常出现待料或线边积压，影响装配节拍。",
+        "suggestion_content": "建议采用看板拉动配送，线边设置Min/Max库存标识，装配工位缺料时按灯呼叫，物流员按呼叫顺序配送。",
+        "suggestion_expected_effect": "线边物料周转率提升20%，待料停线次数减少，装配人均效率预计提升8%。",
+        "suggestion_review_opinion": "符合精益生产方向，同意在A线试点。生产部负责看板设计及物流流程调整，5月评估后推广。"
+      },
+      "dissatisfaction": {
+        "process_name": "生产物流",
+        "nonconformity_clause": "8.5.1.1 生产和服务提供的控制",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "装配线员工反映物料配送不及时，换型时线边积压与缺料交替出现，影响生产节拍和加班时长。",
+        "root_cause_analysis": "1. 物料配送采用推动式，未按实际需求拉动；2. 线边库存标准未建立；3. 换型时物料清单切换不及时。",
+        "corrective_action": "1. 建立线边看板拉动配送机制；2. 制定各工位Min/Max库存标准；3. 换型前30分钟完成物料切换确认。",
+        "corrective_implementation": "A线已完成看板部署及物流员培训，4月份待料停线次数由月均6次降至1次。Min/Max标识全部上墙。",
+        "corrective_verification": "A线装配效率提升9.2%，员工满意度调查中物流配送项评分由3.2提升至4.1。措施有效，计划推广至B线。"
+      }
+    },
+    {
+      "seq": 5,
+      "document_date": "2024-05-08",
+      "suggestion": {
+        "suggestion_category": "培训发展",
+        "suggestion_topic": "多能工技能矩阵可视化",
+        "suggestion_current_state": "员工技能掌握情况仅记录在综管部台账中，车间无法直观了解各岗位可调配人员，遇缺岗时临时协调效率低。",
+        "suggestion_content": "建议在车间看板张贴技能矩阵图，按工序标注每位员工技能等级（独立操作/帮带/未掌握），每季度更新一次。",
+        "suggestion_expected_effect": "缺岗时5分钟内可确定替代人选，多能工培养进度透明，员工学习新技能的积极性提高。",
+        "suggestion_review_opinion": "建议采纳。综管部负责矩阵图模板及数据维护，各车间主管负责现场张贴与季度更新。"
+      },
+      "dissatisfaction": {
+        "process_name": "人力资源管理",
+        "nonconformity_clause": "7.2 能力 / 7.3 意识",
+        "nonconformity_severity": "轻微",
+        "dissatisfaction_description": "员工反映不清楚自身及同事的技能水平，岗位轮换机会不透明，希望了解多能工培养路径和晋升标准。",
+        "root_cause_analysis": "1. 技能信息未向员工公开；2. 缺乏可视化的技能发展路径；3. 多能工考核标准未宣贯到位。",
+        "corrective_action": "1. 建立并公示技能矩阵看板；2. 编制《多能工培养与考核办法》并培训宣贯；3. 每季度公布技能考核结果。",
+        "corrective_implementation": "三个车间均已张贴技能矩阵，办法已培训至全员。5月完成首轮多能工考核，12人获得技能等级提升。",
+        "corrective_verification": "员工访谈确认技能信息透明化，培训发展项满意度评分提升0.8分。纠正措施达到预期效果。"
+      }
+    },
+    {
+      "seq": 6,
+      "document_date": "2024-06-14",
+      "suggestion": {
+        "suggestion_category": "设备管理",
+        "suggestion_topic": "设备点检表简化与电子化",
+        "suggestion_current_state": "目前设备点检表项目过多（32项），部分项目重复，点检耗时约25分钟/台，且纸质记录归档不便。",
+        "suggestion_content": "建议联合设备部与操作工梳理点检项，合并重复项至18项核心点检，并推送到设备终端扫码点检，异常自动推送维修。",
+        "suggestion_expected_effect": "点检时间缩短至12分钟/台，点检完成率100%，异常响应时间由4小时缩短至1.5小时。",
+        "suggestion_review_opinion": "同意采纳。设备部牵头优化点检清单，7月完成终端扫码点检试点。"
+      },
+      "dissatisfaction": {
+        "process_name": "设备维护",
+        "nonconformity_clause": "7.1.5.2 测量资源的控制 / 8.5.1.5 生产和服务提供的更改控制",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "操作工反映设备点检表单繁琐，占用开班时间，部分点检项与实际设备状态关联度不高，存在应付填写现象。",
+        "root_cause_analysis": "1. 点检项未按设备实际风险分级；2. 纸质点检缺乏实时异常预警；3. 点检标准多年未修订。",
+        "corrective_action": "1. 重新评审并精简点检项目；2. 导入扫码点检系统；3. 建立点检异常自动推送机制。",
+        "corrective_implementation": "点检项由32项精简至18项，3条产线完成扫码点检上线。6月点检合规率100%，异常平均响应1.2小时。",
+        "corrective_verification": "设备完好率保持98%以上，操作工反馈点检时间减少50%。纠正措施有效，继续推广至全部产线。"
+      }
+    },
+    {
+      "seq": 7,
+      "document_date": "2024-07-03",
+      "suggestion": {
+        "suggestion_category": "质量改进",
+        "suggestion_topic": "焊接工序首件确认目视化",
+        "suggestion_current_state": "焊接换型后首件确认由班组长口头确认，无实物留样或标识，后续批次出现异常时难以追溯首件确认记录。",
+        "suggestion_content": "建议设置首件样品架，换型首件经检验合格后贴绿色「首件OK」标签并保留至当批生产结束，同时在批记录上签字确认。",
+        "suggestion_expected_effect": "首件确认可追溯，换型质量事故为零，客户审核时有实物证据可查。",
+        "suggestion_review_opinion": "同意采纳。质量部修订首件确认流程，生产部负责样品架配置，立即执行。"
+      },
+      "dissatisfaction": {
+        "process_name": "焊接生产",
+        "nonconformity_clause": "8.6 产品和服务的放行",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "焊接工序员工反映换型时首件确认流程不清晰，班组长确认后无留痕，出现异常时责任难以界定。",
+        "root_cause_analysis": "1. 首件确认缺乏标准化留样要求；2. 确认记录不完整；3. 换型培训中对首件确认强调不足。",
+        "corrective_action": "1. 建立首件样品保留制度；2. 修订《首件检验确认记录表》；3. 换型时强制首件确认签字并留样。",
+        "corrective_implementation": "全部焊接工位已配置首件样品架，7月换型记录100%有首件签字及留样。未发生换型质量异常。",
+        "corrective_verification": "质量部抽查15次换型记录均符合要求。客户二方审核时对首件管理给予肯定。措施有效。"
+      }
+    },
+    {
+      "seq": 8,
+      "document_date": "2024-08-19",
+      "suggestion": {
+        "suggestion_category": "现场管理",
+        "suggestion_topic": "成品仓库货位标签优化",
+        "suggestion_current_state": "成品仓库货位标签字体偏小，叉车作业时不易识别，偶有发错货位情况，盘点效率也受影响。",
+        "suggestion_content": "建议更换大号反光货位标签（字体≥5cm），颜色按客户/产品系列区分，并在地面绘制货位边界线。",
+        "suggestion_expected_effect": "发料差错率降为零，盘点时间缩短30%，仓库5S评分提升。",
+        "suggestion_review_opinion": "同意采纳。物流部负责标签制作及地面划线，9月底前完成全部货位更新。"
+      },
+      "dissatisfaction": {
+        "process_name": "仓储物流",
+        "nonconformity_clause": "8.5.4 防护 / 7.5.3 成文信息的控制",
+        "nonconformity_severity": "轻微",
+        "dissatisfaction_description": "仓库员工反映货位标识不清，夜间及叉车作业时难以快速定位，近期发生2起发错货位事件。",
+        "root_cause_analysis": "1. 货位标签规格过小、反光不足；2. 地面无货位边界标识；3. 新员工仓库培训不足。",
+        "corrective_action": "1. 更换大号反光货位标签；2. 地面绘制货位边界线；3. 强化仓库岗位标识识别培训。",
+        "corrective_implementation": "已完成286个货位标签更换及地面划线。8月至今无发错货位事件，盘点效率提升28%。",
+        "corrective_verification": "物流部月度KPI发料准确率100%。员工反馈货位识别明显便利。纠正措施有效。"
+      }
+    },
+    {
+      "seq": 9,
+      "document_date": "2024-09-25",
+      "suggestion": {
+        "suggestion_category": "沟通协作",
+        "suggestion_topic": "跨部门质量问题快速响应机制",
+        "suggestion_current_state": "出现跨部门质量问题时，通常通过邮件或口头传达，响应周期2-3天，问题处理进度不透明。",
+        "suggestion_content": "建议建立质量问题快速响应群（含质量、生产、技术、物流负责人），问题上报后2小时内召开线上碰头会，24小时内输出临时措施。",
+        "suggestion_expected_effect": "跨部门问题响应时间缩短至24小时内，客户投诉处理周期缩短40%。",
+        "suggestion_review_opinion": "同意采纳。质量部负责机制建立及运行，各部门主管指定固定接口人。"
+      },
+      "dissatisfaction": {
+        "process_name": "不合格品控制",
+        "nonconformity_clause": "10.2 不合格和纠正措施 / 8.7 不合格输出的控制",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "员工反映质量问题反馈后处理进度不清楚，跨部门协调耗时长，同类问题重复发生。",
+        "root_cause_analysis": "1. 缺乏跨部门快速响应机制；2. 问题处理状态未向提报人反馈；3. 纠正措施验证闭环不及时。",
+        "corrective_action": "1. 建立质量问题快速响应机制；2. 问题处理进度看板公示；3. 纠正措施30天内完成验证闭环。",
+        "corrective_implementation": "快速响应群已运行，9月处理跨部门问题7起，平均响应18小时。问题看板每日更新。",
+        "corrective_verification": "同类问题重复发生率下降，提报员工确认处理进度可追踪。客户投诉处理周期缩短35%。措施有效。"
+      }
+    },
+    {
+      "seq": 10,
+      "document_date": "2024-11-12",
+      "suggestion": {
+        "suggestion_category": "效率提升",
+        "suggestion_topic": "检验工位作业指导书电子看板",
+        "suggestion_current_state": "检验工位悬挂纸质SOP，版本更新后常未及时更换，且图纸与SOP分开放置，检验员切换产品时查找不便。",
+        "suggestion_content": "建议在检验工位安装电子看板，扫码产品编号即可显示最新版SOP、图纸及检验标准，版本由质量部统一后台更新。",
+        "suggestion_expected_effect": "SOP版本始终最新，检验准备时间减少50%，因错用旧版SOP导致的误判为零。",
+        "suggestion_review_opinion": "同意采纳。质量部负责内容维护，设备部配合看板安装，12月前在成品检验区完成部署。"
+      },
+      "dissatisfaction": {
+        "process_name": "最终检验",
+        "nonconformity_clause": "7.5.3 成文信息的控制 / 8.5.1.2 标识和可追溯性",
+        "nonconformity_severity": "一般",
+        "dissatisfaction_description": "检验员反映作业指导书更新不及时，图纸与SOP分处不同位置，换型检验时准备时间长，担心使用过期版本。",
+        "root_cause_analysis": "1. 纸质SOP更换依赖人工，易遗漏；2. 图纸与SOP未集中管理；3. 缺乏版本生效日期提醒机制。",
+        "corrective_action": "1. 部署检验工位电子看板；2. 建立SOP/图纸集中查询系统；3. 文件更新后24小时内同步至看板。",
+        "corrective_implementation": "成品检验6个工位已全部安装电子看板，与文件管理系统对接。11月文件更新同步率100%。",
+        "corrective_verification": "检验换型准备时间由平均15分钟降至7分钟，未发生使用过期SOP事件。纠正措施有效，予以关闭。"
+      }
+    }
+  ]
+}

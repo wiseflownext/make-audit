@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>个人培训记录表</title>
+<style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; }
+table { width: 100%; border-collapse: collapse; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; }
+.center { text-align: center; }
+.bold { font-weight: 700; }
+@media print { html, body { background: #fff; } .page { margin: 0; box-shadow: none; } }
+</style></head><body>
+<div class="page">
+<div class="center bold" style="font-size:14pt;margin-bottom:4mm">{{enterprise.name}}</div>
+<div class="center bold" style="font-size:13pt;margin-bottom:6mm">个人培训记录表（{{document.year}}年）</div>
+<table style="margin-bottom:4mm">
+  <tr><td style="width:15%">姓名</td><td style="width:25%">{{employee.name}}</td>
+      <td style="width:15%">部门</td><td style="width:25%">{{employee.department_name}}</td>
+      <td style="width:10%">岗位</td><td>{{employee.position_name}}</td></tr>
+</table>
+<table>
+<thead>
+  <tr class="bold">
+    <th style="width:5%">序号</th>
+    <th style="width:22%">培训课程</th>
+    <th style="width:12%">培训日期</th>
+    <th style="width:8%">时长</th>
+    <th style="width:10%">培训地点</th>
+    <th style="width:10%">讲师</th>
+    <th style="width:10%">考核方式</th>
+    <th style="width:8%">成绩</th>
+    <th style="width:15%">签名</th>
+  </tr>
+</thead>
+<tbody>
+<!-- LIST:training_rows -->
+<tr>
+  <td class="center">{{row.index}}</td>
+  <td>{{training.course_name}}</td>
+  <td class="center">{{training.date}}</td>
+  <td class="center">{{training.duration_hours}}</td>
+  <td class="center">{{training.location}}</td>
+  <td class="center">{{training.trainer}}</td>
+  <td class="center">{{training.assessment_method}}</td>
+  <td class="center">{{training.exam.score}}</td>
+  <td class="center">{{employee.signature}}</td>
+</tr>
+<!-- /LIST -->
+</tbody>
+</table>
+<div style="margin-top:8mm;text-align:right">员工签名：{{employee.signature}}</div>
+</div></body></html>

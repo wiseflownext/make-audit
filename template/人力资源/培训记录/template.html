@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>培训记录</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page > table { flex: 1 1 auto; height: 100%; }
+.page.fill-page table tr.grow { height: 1%; }
+.page.fill-page table tr.grow td { height: 100%; vertical-align: top; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; height: 7mm; }
+.center { text-align: center; }
+.right { text-align: right; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tiny { font-size: 7pt; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page.landscape { width: 297mm; min-height: 210mm; } .page:last-child { page-break-after: auto; } }
+</style></head><body>
+<div class="preview-note">A4 黑白打印预览 · 18培训计划/培训记录/2024年培训记录（空白表单）.xlsx::培训记录</div>
+<section class="page fill-page"><table>
+<colgroup><col style="width:8%"><col style="width:7%"><col style="width:7%"><col style="width:10%"><col style="width:5%"><col style="width:7%"><col style="width:7%"><col style="width:6%"><col style="width:7%"><col style="width:5%"><col style="width:5%"><col style="width:26%"></colgroup>
+<tr><td colspan="12">{{enterprise.name}}</td></tr>
+<tr><td colspan="12" class="center bold" style="font-size:16pt">培训记录</td></tr>
+<tr><td colspan="12" class="right">编号：JLSP-02-04-08</td></tr>
+<tr><td colspan="11">填表日期：{{document.date}}</td><td class="right">页数： 1 / 1</td></tr>
+<tr>
+  <td colspan="2" class="center">培训课程</td><td colspan="6" class="center">{{training.course_name}}</td>
+  <td colspan="3" class="center">讲师姓名</td><td class="center">{{training.instructor_name}}</td>
+</tr>
+<tr>
+  <td colspan="2" class="center">培训期间</td><td colspan="3" class="center">{{training.period}}</td>
+  <td class="center">时  数</td><td colspan="2" class="center">{{training.duration}}</td>
+  <td colspan="3" class="center">应/实到人数</td><td class="center">{{training.attendance}}</td>
+</tr>
+<tr>
+  <td colspan="2" class="center">上课地点</td><td colspan="6" class="center">{{training.location}}</td>
+  <td colspan="3" class="center">考核方式</td><td class="center">{{training.assessment_method}}</td>
+</tr>
+<tr class="grow">
+  <td colspan="2" class="center">培训内容</td>
+  <td colspan="10">{{training.content}}</td>
+</tr>
+<tr>
+  <td colspan="4" class="center">签到记录</td>
+  <td rowspan="2" colspan="2" class="center">合 格<br>标 准</td>
+  <td colspan="2" class="center">成绩</td>
+  <td colspan="3" class="center">结果</td>
+  <td rowspan="2" class="center">备注</td>
+</tr>
+<tr>
+  <td class="center">序号</td><td colspan="2" class="center">部门</td><td class="center">签到</td>
+  <td class="center">首试</td><td class="center">补考</td>
+  <td class="center">合格</td><td colspan="2" class="center">再训</td>
+</tr>
+<!-- LIST:attendance_rows -->
+<tr><td class="center">{{row.index}}</td><td colspan="2" class="center">{{employee.department_name}}</td><td class="center">{{employee.name}}</td><td colspan="2" class="center">理解掌握</td><td class="center">{{training.exam.first_score}}</td><td class="center">{{training.exam.retake_score}}</td><td class="center">{{training.exam.passed}}</td><td colspan="2" class="center">{{training.exam.retrain}}</td><td class="center">&nbsp;</td></tr>
+<!-- /LIST -->
+<tr><td colspan="12">培训有效性评价：</td></tr>
+<tr class="grow"><td colspan="12">{{training.evaluation}}</td></tr>
+<tr><td colspan="12" class="small">备注： 1. 成绩合格标准由讲师或用人单位决定</td></tr>
+<tr><td colspan="12" class="small">       2. 考核种类：A.笔试  B.口试  C.心得报告  D.实地操作  E.其它</td></tr>
+</table></section></body></html>

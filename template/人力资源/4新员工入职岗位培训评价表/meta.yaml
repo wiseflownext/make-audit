@@ -1,0 +1,77 @@
+id: 16员工档案__员工档案文件资料-xlsx__5新员工入职岗位培训评价表
+original_path: 16员工档案/员工档案文件资料.xlsx::5新员工入职岗位培训评价表
+source_file: 员工档案文件资料.xlsx
+sheet_name: 5新员工入职岗位培训评价表
+file_type: xlsx
+top_folder: 16员工档案
+title: 4新员工入职岗位培训评价表
+status: reviewed_ready
+generation_granularity: per_employee
+data_sources:
+- enterprise
+- employee
+- onboarding
+prerequisites: []
+output_naming: 员工档案文件资料-{{employee.name}}-5新员工入职岗位培训评价表
+precheck_enabled: true
+variables:
+- key: 岗位
+  label: 岗位
+  source: employee.position_name
+  type: text
+  location: 岗位
+- key: 姓名
+  label: 姓名
+  source: employee.name
+  type: text
+  location: 姓名
+- key: field_1
+  label: 贴照片处
+  source: auto.detected
+  type: photo
+  location: 贴照片处
+- key: 入厂时间
+  label: 入厂时间
+  source: employee.hire_date
+  type: text
+  location: 入厂时间
+- key: 部门
+  label: 部门
+  source: employee.department_name
+  type: text
+  location: 部门
+- key: 企业
+  label: 企业
+  source: enterprise.name
+  type: text
+  location: 企业
+- key: onboarding.date
+  label: 培训时间
+  source: onboarding.date
+  type: date
+  location: 培训时间
+- key: onboarding.department
+  label: 培训部门
+  source: onboarding.department
+  type: text
+  location: 培训部门
+- key: onboarding.trainer
+  label: 培训人
+  source: onboarding.trainer
+  type: text
+  location: 培训人
+- key: onboarding.conclusion
+  label: 培训结论
+  source: onboarding.conclusion
+  type: text
+  location: 培训结论
+- key: onboarding.meets_requirement
+  label: 是否满足上岗要求
+  source: onboarding.meets_requirement
+  type: text
+  location: 是否满足上岗要求
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print
+review_notes: 16员工档案子域首批复核 - 变量绑定已确认

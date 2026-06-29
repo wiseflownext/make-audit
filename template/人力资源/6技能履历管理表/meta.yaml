@@ -1,0 +1,66 @@
+id: 16员工档案__员工档案文件资料-xlsx__7技能履历个人管理表
+original_path: 16员工档案/员工档案文件资料.xlsx::7技能履历个人管理表
+source_file: 员工档案文件资料.xlsx
+sheet_name: 7技能履历个人管理表
+file_type: xlsx
+top_folder: 16员工档案
+title: 6技能履历管理表
+status: reviewed_ready
+generation_granularity: per_employee
+data_sources:
+- enterprise
+- employee
+prerequisites: []
+output_naming: 员工档案文件资料-{{employee.name}}-7技能履历个人管理表
+precheck_enabled: true
+variables:
+- key: 姓名
+  label: 姓名
+  source: employee.name
+  type: text
+  location: 表头
+- key: 车间
+  label: 车间
+  source: employee.department_name
+  type: text
+  location: 车间
+- key: 性别
+  label: 性别
+  source: employee.gender
+  type: text
+  location: 性别
+- key: 出生年月日
+  label: 出生年月日
+  source: employee.birth_date
+  type: text
+  location: 出生年月日
+- key: 进公司年月日
+  label: 进公司年月日
+  source: employee.hire_date
+  type: text
+  location: 进公司年月日
+- key: 文化程度
+  label: 文化程度
+  source: employee.education
+  type: text
+  location: 文化程度
+- key: 部门
+  label: 部门
+  source: employee.department_name
+  type: text
+  location: 公司内调动
+- key: 岗位
+  label: 岗位
+  source: employee.position_name
+  type: text
+  location: 工作内容/岗位工序
+- key: 毕业院校
+  label: 毕业院校
+  source: employee.school
+  type: text
+  location: 教育的履历
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print
+review_notes: 16员工档案子域首批复核 - 变量绑定已确认

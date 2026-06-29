@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "id": "20员工激励__2024年度员工满意度调查分析报告-xls__员工满意度调查分析报告",
+    "original_path": "20员工激励/2024年度员工满意度调查分析报告.xls::员工满意度调查分析报告",
+    "source_file": "2024年度员工满意度调查分析报告.xls",
+    "sheet_name": "员工满意度调查分析报告",
+    "file_type": "xls",
+    "top_folder": "20员工激励",
+    "title": "11员工满意度调查分析报告",
+    "status": "pending_review",
+    "generation_granularity": "per_enterprise",
+    "data_sources": ["enterprise", "incentive", "document", "signature"],
+    "prerequisites": [],
+    "output_naming": "{{incentive.survey_year}}年度员工满意度调查分析报告",
+    "precheck_enabled": true,
+    "variables": [],
+    "signature_mappings": [],
+    "date_mappings": [],
+    "checkbox_mappings": [],
+    "render_mode": "a4-print"
+  },
+  "structured": {
+    "kind": "incentive_analysis_report",
+    "render_mode": "a4-print"
+  }
+}

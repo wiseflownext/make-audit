@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>岗位安全检查表</title><style>
+@page { size: A4 landscape; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.preview-note.landscape { width: 297mm; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page > table { flex: 1 1 auto; height: 100%; }
+.page.fill-page table tr.grow td { height: 100%; vertical-align: top; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tall { height: 18mm; }
+.taller { height: 28mm; }
+.photo-box { height: 32mm; vertical-align: middle; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page.landscape { width: 297mm; min-height: 210mm; } .page:last-child { page-break-after: auto; } }
+
+.rating-table td, .rating-table th { font-size: 9pt; padding: 1mm; }
+.rating-table .item { text-align: left; }
+.rating-table .score { width: 6mm; text-align: center; }
+.section-head { font-weight: 700; text-align: center; }
+.note { font-size: 9pt; margin-top: 3mm; }
+
+.inspection-table { font-size: 8pt; }
+.inspection-table td, .inspection-table th { padding: 0.4mm 0.5mm; line-height: 1.15; height: auto; min-height: 3.8mm; word-break: break-all; }
+.page.landscape { padding: 8mm 10mm !important; }
+.inspection-table .title-row td { font-size: 15pt; font-weight: 700; border: none; padding-bottom: 1.5mm; }
+.inspection-table .meta-row td { font-size: 9.5pt; border: none; padding-bottom: 2.5mm; }
+.inspection-table .date-col { width: 8mm; font-size: 7.5pt; }
+.inspection-table .check-col { width: auto; font-size: 7pt; padding: 0.2mm; }
+.inspection-table .item-head { writing-mode: vertical-rl; text-orientation: mixed; font-size: 7pt; font-weight: 400; height: 34mm; max-height: 34mm; padding: 1mm 0.4mm; text-align: center; letter-spacing: 0.2mm; }
+.inspection-table .issue-col { width: 18mm; vertical-align: top; font-size: 7.5pt; }
+.inspection-table .sign-col { width: 20mm; min-height: 7mm; vertical-align: middle; }
+.inspection-table .note-col { text-align: left; font-size: 7.5pt; vertical-align: top; }
+</style></head><body><div class="preview-note landscape">A4 黑白打印预览 · 21岗位安全/岗位安全检查表.xls::2月份</div>
+<section class="page landscape">
+<table class="inspection-table">
+<colgroup>
+<col class="date-col"><col span="11"><col class="issue-col"><col class="sign-col">
+</colgroup>
+<tr class="title-row">
+  <td colspan="14" class="center" style="border:none;font-size:15pt;font-weight:700;padding-bottom:1.5mm;position:relative;">
+    岗 位 安 全 检 查 表
+    <span style="position:absolute;right:0;bottom:1.5mm;font-weight:400;font-size:9pt">EHS-D23</span>
+  </td>
+</tr>
+<tr class="meta-row">
+  <td colspan="14" style="border:none;font-size:9.5pt;padding:1mm 0 2.5mm 0;line-height:1.2;">
+    <span style="float:left;font-weight:700;">岗位：<span style="font-weight:400;">{{employee.position_name}}</span></span>
+    <span style="float:right;font-weight:700;">月份：<span style="font-weight:400;">{{position_safety.month_label}}</span></span>
+  </td>
+</tr>
+<tr>
+  <th rowspan="2" class="date-col center">日期</th>
+  <th colspan="11" class="center">检查情况</th>
+  <th rowspan="33" class="issue-col" style="vertical-align:top;padding:2mm 1.2mm;">
+    <div style="text-align:center;font-weight:700;margin-bottom:3mm;">问题及整改情况</div>
+    <div style="font-weight:400;text-align:left;line-height:1.4;">{{position_safety.rectification_notes}}</div>
+  </th>
+  <th rowspan="2" class="sign-col center">当班检查人</th>
+</tr>
+<tr>
+  <th class="item-head center">1.劳保用品穿戴</th>
+  <th class="item-head center">2.无“三违”现象</th>
+  <th class="item-head center">3.灭火器材消防沙</th>
+  <th class="item-head center">4.防爆照明无漏电</th>
+  <th class="item-head center">5.斜梯平台护栏</th>
+  <th class="item-head center">6.阀门灵活无泄漏</th>
+  <th class="item-head center">7.仪表数据正常</th>
+  <th class="item-head center">8.报警装置正常</th>
+  <th class="item-head center">9.无违规动火</th>
+  <th class="item-head center">10.设备运转正常</th>
+  <th class="item-head center">11.警示标识完好</th>
+</tr>
+<tr><td class="date-col center">1</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">2</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">3</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">4</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">5</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">6</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">7</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">8</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">9</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">10</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">11</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">12</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">13</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">14</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">15</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">16</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">17</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">18</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">19</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">20</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">21</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">22</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">23</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">24</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">25</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">26</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">27</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">28</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">29</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">30</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr><td class="date-col center">31</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="check-col center">&nbsp;</td><td class="sign-col center">&nbsp;</td></tr>
+<tr>
+  <td colspan="14" class="note-col" style="padding: 1.5mm 2mm; line-height: 1.35; font-size: 7.5pt;">
+    <strong>使用说明：</strong><br>
+    1、根据现场检查情况，正常在小格内打“√”，异常打“×”。将发现问题、整改情况填写在“问题及整改情况”栏中。<br>
+    2、<strong>检查内容细则：</strong><strong>1.劳保用品穿戴：</strong>按规穿戴防护用品；<strong>2.无“三违”现象：</strong>无违章指挥/作业/违反纪律；<strong>3.灭火器材消防沙：</strong>器材齐全在有效期内、沙充足；<strong>4.防爆照明无漏电：</strong>照明齐全无漏电；<strong>5.斜梯平台护栏：</strong>平台、护栏、扶手规范无破损；<strong>6.阀门灵活无泄漏：</strong>阀门启闭灵活、密封无泄漏；<strong>7.仪表数据正常：</strong>压力、温度等仪表显示正常；<strong>8.报警装置正常：</strong>气体/火灾报警装置运转正常；<strong>9.无违规动火：</strong>区域内无违章动火用电；<strong>10.设备运转正常：</strong>动/静设备运转平稳、无异响震动；<strong>11.警示标识完好：</strong>标识完好无脱落、清洁。
+  </td>
+</tr>
+</table>
+</section></body></html>

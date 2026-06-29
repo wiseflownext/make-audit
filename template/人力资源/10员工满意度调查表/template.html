@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>10员工满意度调查表</title><style>
+@page { size: A4 landscape; margin: 10mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 297mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 297mm; min-height: 210mm; margin: 0 auto 12px; padding: 10mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 2mm; }
+.page.fill-page .form-table { flex: 1 1 auto; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 0.8mm 1mm; vertical-align: middle; word-break: break-word; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 0.8mm 1mm; vertical-align: middle; word-break: break-word; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tiny { font-size: 7pt; }
+.survey-table td, .survey-table th { font-size: 8pt; line-height: 1.25; height: auto; min-height: 5.5mm; padding: 0.6mm 0.8mm; }
+.survey-table .num-col { width: 6%; }
+.survey-table .cat-col { width: 10%; }
+.survey-table .item-col { width: 44%; text-align: left; }
+.survey-table .score-col { width: 8%; text-align: center; }
+.survey-table .cat-label { font-weight: 700; }
+.survey-table .note-row td { font-size: 8pt; line-height: 1.5; text-align: left; vertical-align: top; padding: 1.5mm 2mm; }
+.meta-row { display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; margin-top: 1mm; }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 横向黑白打印预览 · 20员工激励/2024年度员工满意度调查分析报告.xls::员工满意度调查表</div>
+
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="center bold" style="font-size:15pt;margin:2mm 0">员工满意度调查表</div>
+  <div class="meta-row">
+    <span class="small">填表日期：{{document.date}}</span>
+    <span class="small">编号：JLSP-02-05-02</span>
+  </div>
+</div>
+<table class="form-table survey-table">
+<colgroup>
+<col class="num-col"><col class="cat-col"><col class="item-col">
+<col class="score-col"><col class="score-col"><col class="score-col"><col class="score-col"><col class="score-col">
+</colgroup>
+<tr>
+  <th class="center">序号</th>
+  <th class="center">评价类别</th>
+  <th class="center">评价项目</th>
+  <th class="tiny center">心悦<br>5</th>
+  <th class="tiny center">认同<br>4</th>
+  <th class="tiny center">平常<br>3</th>
+  <th class="tiny center">存疑<br>2</th>
+  <th class="tiny center">否然<br>1</th>
+</tr>
+<tr><td class="center">1</td><td rowspan="4" class="center cat-label">业务焦点</td><td class="item-col">我清楚了解公司的目标和发展方向。</td><td class="center">{{survey.q01_c5}}</td><td class="center">{{survey.q01_c4}}</td><td class="center">{{survey.q01_c3}}</td><td class="center">{{survey.q01_c2}}</td><td class="center">{{survey.q01_c1}}</td></tr>
+<tr><td class="center">2</td><td class="item-col">我感到有责任为公司赢得并保持良好的声誉。</td><td class="center">{{survey.q02_c5}}</td><td class="center">{{survey.q02_c4}}</td><td class="center">{{survey.q02_c3}}</td><td class="center">{{survey.q02_c2}}</td><td class="center">{{survey.q02_c1}}</td></tr>
+<tr><td class="center">3</td><td class="item-col">我信任并尊重公司的管理阶层。</td><td class="center">{{survey.q03_c5}}</td><td class="center">{{survey.q03_c4}}</td><td class="center">{{survey.q03_c3}}</td><td class="center">{{survey.q03_c2}}</td><td class="center">{{survey.q03_c1}}</td></tr>
+<tr><td class="center">4</td><td class="item-col">我清楚了解我们客户的需要。</td><td class="center">{{survey.q04_c5}}</td><td class="center">{{survey.q04_c4}}</td><td class="center">{{survey.q04_c3}}</td><td class="center">{{survey.q04_c2}}</td><td class="center">{{survey.q04_c1}}</td></tr>
+<tr><td class="center">5</td><td rowspan="8" class="center cat-label">领导与管理</td><td class="item-col">我的直属上司给我清晰的工作目标和期望。</td><td class="center">{{survey.q05_c5}}</td><td class="center">{{survey.q05_c4}}</td><td class="center">{{survey.q05_c3}}</td><td class="center">{{survey.q05_c2}}</td><td class="center">{{survey.q05_c1}}</td></tr>
+<tr><td class="center">6</td><td class="item-col">我有明确的工作表现标准。</td><td class="center">{{survey.q06_c5}}</td><td class="center">{{survey.q06_c4}}</td><td class="center">{{survey.q06_c3}}</td><td class="center">{{survey.q06_c2}}</td><td class="center">{{survey.q06_c1}}</td></tr>
+<tr><td class="center">7</td><td class="item-col">我清楚了解我的工作与部门总体目标之间的关系（职责、目标等）。</td><td class="center">{{survey.q07_c5}}</td><td class="center">{{survey.q07_c4}}</td><td class="center">{{survey.q07_c3}}</td><td class="center">{{survey.q07_c2}}</td><td class="center">{{survey.q07_c1}}</td></tr>
+<tr><td class="center">8</td><td class="item-col">我认为我的直属上司清楚了解我的工作。</td><td class="center">{{survey.q08_c5}}</td><td class="center">{{survey.q08_c4}}</td><td class="center">{{survey.q08_c3}}</td><td class="center">{{survey.q08_c2}}</td><td class="center">{{survey.q08_c1}}</td></tr>
+<tr><td class="center">9</td><td class="item-col">我的直属上司给我指导、支持和鼓励。</td><td class="center">{{survey.q09_c5}}</td><td class="center">{{survey.q09_c4}}</td><td class="center">{{survey.q09_c3}}</td><td class="center">{{survey.q09_c2}}</td><td class="center">{{survey.q09_c1}}</td></tr>
+<tr><td class="center">10</td><td class="item-col">我有足够的资源完成工作。</td><td class="center">{{survey.q10_c5}}</td><td class="center">{{survey.q10_c4}}</td><td class="center">{{survey.q10_c3}}</td><td class="center">{{survey.q10_c2}}</td><td class="center">{{survey.q10_c1}}</td></tr>
+<tr><td class="center">11</td><td class="item-col">我有权力去解决工作上的问题。</td><td class="center">{{survey.q11_c5}}</td><td class="center">{{survey.q11_c4}}</td><td class="center">{{survey.q11_c3}}</td><td class="center">{{survey.q11_c2}}</td><td class="center">{{survey.q11_c1}}</td></tr>
+<tr><td class="center">12</td><td class="item-col">我的工作表现得到公平的评价。</td><td class="center">{{survey.q12_c5}}</td><td class="center">{{survey.q12_c4}}</td><td class="center">{{survey.q12_c3}}</td><td class="center">{{survey.q12_c2}}</td><td class="center">{{survey.q12_c1}}</td></tr>
+<tr><td class="center">13</td><td rowspan="5" class="center cat-label">培训与发展</td><td class="item-col">公司给我机会去提高我的技能。</td><td class="center">{{survey.q13_c5}}</td><td class="center">{{survey.q13_c4}}</td><td class="center">{{survey.q13_c3}}</td><td class="center">{{survey.q13_c2}}</td><td class="center">{{survey.q13_c1}}</td></tr>
+<tr><td class="center">14</td><td class="item-col">公司给我适当的培训使我与时并进。</td><td class="center">{{survey.q14_c5}}</td><td class="center">{{survey.q14_c4}}</td><td class="center">{{survey.q14_c3}}</td><td class="center">{{survey.q14_c2}}</td><td class="center">{{survey.q14_c1}}</td></tr>
+<tr><td class="center">15</td><td class="item-col">公司给员工培训以配合其晋升和事业发展。</td><td class="center">{{survey.q15_c5}}</td><td class="center">{{survey.q15_c4}}</td><td class="center">{{survey.q15_c3}}</td><td class="center">{{survey.q15_c2}}</td><td class="center">{{survey.q15_c1}}</td></tr>
+<tr><td class="center">16</td><td class="item-col">公司给我有用且有效的培训。</td><td class="center">{{survey.q16_c5}}</td><td class="center">{{survey.q16_c4}}</td><td class="center">{{survey.q16_c3}}</td><td class="center">{{survey.q16_c2}}</td><td class="center">{{survey.q16_c1}}</td></tr>
+<tr><td class="center">17</td><td class="item-col">公司给表现优秀的员工应得的事业发展机会。</td><td class="center">{{survey.q17_c5}}</td><td class="center">{{survey.q17_c4}}</td><td class="center">{{survey.q17_c3}}</td><td class="center">{{survey.q17_c2}}</td><td class="center">{{survey.q17_c1}}</td></tr>
+<tr><td class="center">18</td><td rowspan="8" class="center cat-label">品质与创新</td><td class="item-col">我清楚了解公司有关品质的要求。</td><td class="center">{{survey.q18_c5}}</td><td class="center">{{survey.q18_c4}}</td><td class="center">{{survey.q18_c3}}</td><td class="center">{{survey.q18_c2}}</td><td class="center">{{survey.q18_c1}}</td></tr>
+<tr><td class="center">19</td><td class="item-col">我的部门有足够的资源（如人才、系统及财务资源）去提供高品质的工作或产品。</td><td class="center">{{survey.q19_c5}}</td><td class="center">{{survey.q19_c4}}</td><td class="center">{{survey.q19_c3}}</td><td class="center">{{survey.q19_c2}}</td><td class="center">{{survey.q19_c1}}</td></tr>
+<tr><td class="center">20</td><td class="item-col">管理阶层采取正确的措施改善品质。</td><td class="center">{{survey.q20_c5}}</td><td class="center">{{survey.q20_c4}}</td><td class="center">{{survey.q20_c3}}</td><td class="center">{{survey.q20_c2}}</td><td class="center">{{survey.q20_c1}}</td></tr>
+<tr><td class="center">21</td><td class="item-col">公司采取适当的改革提高其竞争力。</td><td class="center">{{survey.q21_c5}}</td><td class="center">{{survey.q21_c4}}</td><td class="center">{{survey.q21_c3}}</td><td class="center">{{survey.q21_c2}}</td><td class="center">{{survey.q21_c1}}</td></tr>
+<tr><td class="center">22</td><td class="item-col">公司每个员工都致力为客户提供高品质的服务或产品。</td><td class="center">{{survey.q22_c5}}</td><td class="center">{{survey.q22_c4}}</td><td class="center">{{survey.q22_c3}}</td><td class="center">{{survey.q22_c2}}</td><td class="center">{{survey.q22_c1}}</td></tr>
+<tr><td class="center">23</td><td class="item-col">公司鼓励我提出新而更好的工作方法。</td><td class="center">{{survey.q23_c5}}</td><td class="center">{{survey.q23_c4}}</td><td class="center">{{survey.q23_c3}}</td><td class="center">{{survey.q23_c2}}</td><td class="center">{{survey.q23_c1}}</td></tr>
+<tr><td class="center">24</td><td class="item-col">我愿在工作上作出必要的改进以提高品质或服务。</td><td class="center">{{survey.q24_c5}}</td><td class="center">{{survey.q24_c4}}</td><td class="center">{{survey.q24_c3}}</td><td class="center">{{survey.q24_c2}}</td><td class="center">{{survey.q24_c1}}</td></tr>
+<tr><td class="center">25</td><td class="item-col">公司的产品或服务品质比竞争对手高。</td><td class="center">{{survey.q25_c5}}</td><td class="center">{{survey.q25_c4}}</td><td class="center">{{survey.q25_c3}}</td><td class="center">{{survey.q25_c2}}</td><td class="center">{{survey.q25_c1}}</td></tr>
+</table>
+</section>
+
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="center bold" style="font-size:15pt;margin:2mm 0">员工满意度调查表（续）</div>
+  <div class="meta-row">
+    <span class="small">填表日期：{{document.date}}</span>
+    <span class="small">编号：JLSP-02-05-02</span>
+  </div>
+</div>
+<table class="form-table survey-table">
+<colgroup>
+<col class="num-col"><col class="cat-col"><col class="item-col">
+<col class="score-col"><col class="score-col"><col class="score-col"><col class="score-col"><col class="score-col">
+</colgroup>
+<tr>
+  <th class="center">序号</th>
+  <th class="center">评价类别</th>
+  <th class="center">评价项目</th>
+  <th class="tiny center">心悦<br>5</th>
+  <th class="tiny center">认同<br>4</th>
+  <th class="tiny center">平常<br>3</th>
+  <th class="tiny center">存疑<br>2</th>
+  <th class="tiny center">否然<br>1</th>
+</tr>
+<tr><td class="center">26</td><td rowspan="7" class="center cat-label">工作条件环境</td><td class="item-col">我满意公司提供的：社会保险。</td><td class="center">{{survey.q26_c5}}</td><td class="center">{{survey.q26_c4}}</td><td class="center">{{survey.q26_c3}}</td><td class="center">{{survey.q26_c2}}</td><td class="center">{{survey.q26_c1}}</td></tr>
+<tr><td class="center">27</td><td class="item-col">我满意公司提供的：医疗待遇。</td><td class="center">{{survey.q27_c5}}</td><td class="center">{{survey.q27_c4}}</td><td class="center">{{survey.q27_c3}}</td><td class="center">{{survey.q27_c2}}</td><td class="center">{{survey.q27_c1}}</td></tr>
+<tr><td class="center">28</td><td class="item-col">我满意公司提供的：业余文化生活。</td><td class="center">{{survey.q28_c5}}</td><td class="center">{{survey.q28_c4}}</td><td class="center">{{survey.q28_c3}}</td><td class="center">{{survey.q28_c2}}</td><td class="center">{{survey.q28_c1}}</td></tr>
+<tr><td class="center">29</td><td class="item-col">我的薪金够得上同类公司所付出的水平。</td><td class="center">{{survey.q29_c5}}</td><td class="center">{{survey.q29_c4}}</td><td class="center">{{survey.q29_c3}}</td><td class="center">{{survey.q29_c2}}</td><td class="center">{{survey.q29_c1}}</td></tr>
+<tr><td class="center">30</td><td class="item-col">我认为我的薪金与我现时的工作责任相符。</td><td class="center">{{survey.q30_c5}}</td><td class="center">{{survey.q30_c4}}</td><td class="center">{{survey.q30_c3}}</td><td class="center">{{survey.q30_c2}}</td><td class="center">{{survey.q30_c1}}</td></tr>
+<tr><td class="center">31</td><td class="item-col">我有良好的工作环境，例如温度、空气、清洁环境等。</td><td class="center">{{survey.q31_c5}}</td><td class="center">{{survey.q31_c4}}</td><td class="center">{{survey.q31_c3}}</td><td class="center">{{survey.q31_c2}}</td><td class="center">{{survey.q31_c1}}</td></tr>
+<tr><td class="center">32</td><td class="item-col">我的工作环境及设施使我能充分发挥我的工作效率。</td><td class="center">{{survey.q32_c5}}</td><td class="center">{{survey.q32_c4}}</td><td class="center">{{survey.q32_c3}}</td><td class="center">{{survey.q32_c2}}</td><td class="center">{{survey.q32_c1}}</td></tr>
+<tr><td class="center">33</td><td rowspan="8" class="center cat-label">沟通</td><td class="item-col">我充分了解公司发生的改变。</td><td class="center">{{survey.q33_c5}}</td><td class="center">{{survey.q33_c4}}</td><td class="center">{{survey.q33_c3}}</td><td class="center">{{survey.q33_c2}}</td><td class="center">{{survey.q33_c1}}</td></tr>
+<tr><td class="center">34</td><td class="item-col">各个部门间有有效的沟通。</td><td class="center">{{survey.q34_c5}}</td><td class="center">{{survey.q34_c4}}</td><td class="center">{{survey.q34_c3}}</td><td class="center">{{survey.q34_c2}}</td><td class="center">{{survey.q34_c1}}</td></tr>
+<tr><td class="center">35</td><td class="item-col">如果我有意见，我会向上级提出。</td><td class="center">{{survey.q35_c5}}</td><td class="center">{{survey.q35_c4}}</td><td class="center">{{survey.q35_c3}}</td><td class="center">{{survey.q35_c2}}</td><td class="center">{{survey.q35_c1}}</td></tr>
+<tr><td class="center">36</td><td class="item-col">公司与我的沟通是诚实和公开的。</td><td class="center">{{survey.q36_c5}}</td><td class="center">{{survey.q36_c4}}</td><td class="center">{{survey.q36_c3}}</td><td class="center">{{survey.q36_c2}}</td><td class="center">{{survey.q36_c1}}</td></tr>
+<tr><td class="center">37</td><td class="item-col">公司尊重每一位员工，不论职位高低。</td><td class="center">{{survey.q37_c5}}</td><td class="center">{{survey.q37_c4}}</td><td class="center">{{survey.q37_c3}}</td><td class="center">{{survey.q37_c2}}</td><td class="center">{{survey.q37_c1}}</td></tr>
+<tr><td class="center">38</td><td class="item-col">我们的部门很团结，合作性很高。</td><td class="center">{{survey.q38_c5}}</td><td class="center">{{survey.q38_c4}}</td><td class="center">{{survey.q38_c3}}</td><td class="center">{{survey.q38_c2}}</td><td class="center">{{survey.q38_c1}}</td></tr>
+<tr><td class="center">39</td><td class="item-col">我们的部门跟其他部门合作无间。</td><td class="center">{{survey.q39_c5}}</td><td class="center">{{survey.q39_c4}}</td><td class="center">{{survey.q39_c3}}</td><td class="center">{{survey.q39_c2}}</td><td class="center">{{survey.q39_c1}}</td></tr>
+<tr><td class="center">40</td><td class="item-col">我的直属上司嘉许团队的合作性。</td><td class="center">{{survey.q40_c5}}</td><td class="center">{{survey.q40_c4}}</td><td class="center">{{survey.q40_c3}}</td><td class="center">{{survey.q40_c2}}</td><td class="center">{{survey.q40_c1}}</td></tr>
+<tr><td class="center">41</td><td rowspan="4" class="center cat-label">承诺</td><td class="item-col">我的工作使我有成就感。</td><td class="center">{{survey.q41_c5}}</td><td class="center">{{survey.q41_c4}}</td><td class="center">{{survey.q41_c3}}</td><td class="center">{{survey.q41_c2}}</td><td class="center">{{survey.q41_c1}}</td></tr>
+<tr><td class="center">42</td><td class="item-col">我感到我们公司能和我所知的任何公司作比较。</td><td class="center">{{survey.q42_c5}}</td><td class="center">{{survey.q42_c4}}</td><td class="center">{{survey.q42_c3}}</td><td class="center">{{survey.q42_c2}}</td><td class="center">{{survey.q42_c1}}</td></tr>
+<tr><td class="center">43</td><td class="item-col">我打算在公司里发展我的事业。</td><td class="center">{{survey.q43_c5}}</td><td class="center">{{survey.q43_c4}}</td><td class="center">{{survey.q43_c3}}</td><td class="center">{{survey.q43_c2}}</td><td class="center">{{survey.q43_c1}}</td></tr>
+<tr><td class="center">44</td><td class="item-col">总的来说我满意我的工作。</td><td class="center">{{survey.q44_c5}}</td><td class="center">{{survey.q44_c4}}</td><td class="center">{{survey.q44_c3}}</td><td class="center">{{survey.q44_c2}}</td><td class="center">{{survey.q44_c1}}</td></tr>
+<tr><td class="center">45</td><td rowspan="6" class="center cat-label">激励</td><td class="item-col">我的工作对于公司来说是重要的。</td><td class="center">{{survey.q45_c5}}</td><td class="center">{{survey.q45_c4}}</td><td class="center">{{survey.q45_c3}}</td><td class="center">{{survey.q45_c2}}</td><td class="center">{{survey.q45_c1}}</td></tr>
+<tr><td class="center">46</td><td class="item-col">公司创造的环境让拥有不同背景的人都能成功。</td><td class="center">{{survey.q46_c5}}</td><td class="center">{{survey.q46_c4}}</td><td class="center">{{survey.q46_c3}}</td><td class="center">{{survey.q46_c2}}</td><td class="center">{{survey.q46_c1}}</td></tr>
+<tr><td class="center">47</td><td class="item-col">在我的工作范围内我们会以顾客为先。</td><td class="center">{{survey.q47_c5}}</td><td class="center">{{survey.q47_c4}}</td><td class="center">{{survey.q47_c3}}</td><td class="center">{{survey.q47_c2}}</td><td class="center">{{survey.q47_c1}}</td></tr>
+<tr><td class="center">48</td><td class="item-col">我经常参与与我工作相关的决策。</td><td class="center">{{survey.q48_c5}}</td><td class="center">{{survey.q48_c4}}</td><td class="center">{{survey.q48_c3}}</td><td class="center">{{survey.q48_c2}}</td><td class="center">{{survey.q48_c1}}</td></tr>
+<tr><td class="center">49</td><td class="item-col">员工得到应得的晋升机会。</td><td class="center">{{survey.q49_c5}}</td><td class="center">{{survey.q49_c4}}</td><td class="center">{{survey.q49_c3}}</td><td class="center">{{survey.q49_c2}}</td><td class="center">{{survey.q49_c1}}</td></tr>
+<tr><td class="center">50</td><td class="item-col">我的良好表现得到奖励。</td><td class="center">{{survey.q50_c5}}</td><td class="center">{{survey.q50_c4}}</td><td class="center">{{survey.q50_c3}}</td><td class="center">{{survey.q50_c2}}</td><td class="center">{{survey.q50_c1}}</td></tr>
+<tr class="note-row"><td colspan="8">
+填表须知：诚以自照，于所感处打"√"。心悦为甚合，否然为未安。请于期限前交综管部，感谢参与。
+</td></tr>
+</table>
+</section>
+</body></html>

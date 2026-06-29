@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>8合理化建议表</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10pt; line-height: 1.2; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+.page.fill-page { display: flex; flex-direction: column; height: 297mm; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 1.5mm; height: 17mm; }
+.page.fill-page .form-table { flex: 1 1 auto; height: 210mm; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 0.7mm 1mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+
+/* Precise Row Heights */
+.page.fill-page .form-table tr.meta-row { height: 8mm; }
+.page.fill-page .form-table tr.subject-row { height: 9mm; }
+.page.fill-page .form-table tr.grow-row { height: 42mm; }
+.page.fill-page .form-table tr.grow-row td { vertical-align: top; }
+.page.fill-page .form-table tr.grow-row td.section-label { vertical-align: middle; text-align: center; font-size: 9.5pt; line-height: 1.25; }
+.page.fill-page .form-table tr.grow-row td.content-cell { font-size: 9.5pt; line-height: 1.2; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 0.7mm 1mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8.5pt; }
+.footer-notes { margin-top: 2mm; font-size: 8pt; line-height: 1.35; flex: 0 0 auto; height: 16mm; }
+.footer-notes p { margin: 0 0 0.5mm; }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 20员工激励/2024年度员工满意度调查分析报告.xls::1合理化建议表</div>
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="center bold" style="font-size:13pt;margin:1mm 0">合理化建议表</div>
+  <div class="right small">编号：JLSP-02-05-01</div>
+</div>
+<table class="form-table">
+<colgroup>
+<col style="width:14%"><col style="width:16%"><col style="width:14%"><col style="width:16%">
+<col style="width:10%"><col style="width:30%">
+</colgroup>
+<tr class="meta-row">
+  <td class="center">建议人</td><td class="center">{{employee.name}}</td>
+  <td class="center">所在部门</td><td class="center">{{employee.department_name}}</td>
+  <td class="center">职务</td><td class="center">{{employee.position_name}}</td>
+</tr>
+<tr class="meta-row">
+  <td class="center">建议日期</td><td class="center">{{document.date}}</td>
+  <td class="center">建议类别</td><td colspan="3" class="center">{{incentive.suggestion_category}}</td>
+</tr>
+<tr class="subject-row">
+  <td class="center">合理化建议主题</td><td colspan="5">{{incentive.suggestion_topic}}</td>
+</tr>
+
+<!-- Section 1 -->
+<tr class="grow-row">
+  <td class="center section-label">1、现状<br>（现在的做法/状况描述）</td>
+  <td colspan="5" class="content-cell">{{incentive.suggestion_current_state}}</td>
+</tr>
+
+<!-- Section 2 -->
+<tr class="grow-row">
+  <td class="center section-label">2、合理化建议内容</td>
+  <td colspan="5" class="content-cell">{{incentive.suggestion_content}}</td>
+</tr>
+
+<!-- Section 3 -->
+<tr class="grow-row">
+  <td class="center section-label">3、预计建议采纳后的效果</td>
+  <td colspan="5" class="content-cell">{{incentive.suggestion_expected_effect}}</td>
+</tr>
+
+<!-- Section 4 -->
+<tr class="grow-row">
+  <td class="center section-label">4、评审小组处理意见</td>
+  <td colspan="5" class="content-cell">{{incentive.suggestion_review_opinion}}</td>
+</tr>
+</table>
+<div class="footer-notes">
+  <p>一、员工可以随时提出合理化建议交车间主任或部门主管，由车间主任或主管及时交综管部；</p>
+  <p>二、公司将根据采纳情况给予不同程度的奖励；</p>
+  <p>三、建议是否采纳，综管部将在提出建议后一周内反馈给建议人。</p>
+</div>
+</section></body></html>

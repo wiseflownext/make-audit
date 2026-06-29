@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>1新员工入职需知</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 2mm; }
+.page.fill-page .form-table { flex: 1 1 auto; height: 100%; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.page.fill-page .form-table tr.grow td { height: 100%; vertical-align: top; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tiny { font-size: 7pt; }
+.label-col { width: 14%; text-align: center; }
+.photo-box { width: 22mm; vertical-align: middle; }
+.skill-resume-table td, .skill-resume-table th { padding: 0.6mm 0.8mm; font-size: 8pt; line-height: 1.25; }
+.skill-resume-table .section-label { font-size: 8pt; }
+.skill-resume-table .info-label { white-space: nowrap; }
+.lined-box { min-height: 72mm; vertical-align: top; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 7.4mm, #000 7.4mm, #000 7.5mm); background-size: 100% 7.5mm; }
+.opinion-box { min-height: 36mm; vertical-align: top; padding: 0; }
+.opinion-inner { display: flex; flex-direction: column; height: 100%; min-height: 34mm; padding: 1.2mm 1.4mm; }
+.opinion-sign { margin-top: auto; text-align: right; padding-top: 4mm; }
+.contract-wrap { border: 1px solid #000; padding: 6mm 8mm; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; }
+.contract-body p { margin: 0 0 2mm; line-height: 1.65; text-indent: 0; }
+.contract-body .clause { margin-bottom: 1.5mm; }
+.contract-body .sub { text-indent: 2em; }
+.contract-sign { margin-top: 8mm; line-height: 2.2; }
+.text-list p { margin: 0 0 3mm; line-height: 1.65; font-weight: 700; }
+.text-list .sign-block { margin-top: auto; padding-top: 12mm; text-align: center; font-weight: 700; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page.landscape { width: 297mm; min-height: 210mm; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 16员工档案/员工档案文件资料.xlsx::2新员工入职需知</div>
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="right small">编号：JLSP-02-04-02</div>
+  <div class="center bold" style="font-size:16pt;margin:3mm 0">新员工入职需知</div>
+</div>
+<div class="contract-wrap text-list">
+<div>
+<p>1、新员工试用期为7天，公司会依据实际情况调整试用期时间。试用期内不合格者，公司可随时辞退员工。</p>
+<p>2、试用期内员工辞职，需提前一天向公司提出申请，试用期后员工辞职，必须提前一个月(30天)向公司提出书面申请，如未达到辞职期限，私自不来岗位参与工作，影响工作交接及正常运行，则将扣除2个月工资。</p>
+<p>3、新员工必需保证所填信息和提供证件资料真实可靠，经核查有弄虚作假的员工，公司将随时辞退，相关不良后果由员工负责。</p>
+<p>4、员工入职后需按要求打卡，请假需经批准，病假需提交证明，遵守考勤规定。</p>
+<p>5、员工在职期内不得兼职与本公司有竞争性的、类似的或职务上有关的工作。</p>
+<p>6、员工若有亲属、亲戚、同学、朋友在公司就职，入职前须如实告知公司，如有隐瞒，经公司查出，将按公司制度开除处理。</p>
+<p>7、工作中服从安排，尊重上司、团结同事、友好合作、完成工作任务。</p>
+<p>8、员工不得造谣生事、敲诈、盗窃、打架、煽动或教唆怠工、停工、罢工、在公司酗酒或赌博、无故抗命或侮辱主管人员及有伤风化行为。</p>
+<p>9、员工必须遵守公司所有的规章制度、通知、公告等。</p>
+<p>10、岗位工资：岗位为{{employee.position_name}}，岗位工资：80。</p>
+<p>郑重声明：本人已仔细阅读公司入职须知，并承诺自觉遵守，如有违反，愿接受公司相关制度的处罚。</p>
+</div>
+<div class="sign-block">员工签名：{{employee.signature}}　　日期：{{document.date}}</div>
+</div>
+</section></body></html>

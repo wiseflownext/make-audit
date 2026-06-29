@@ -1,0 +1,31 @@
+id: 16员工档案__员工档案文件资料-xlsx__6转正申请表
+original_path: 16员工档案/员工档案文件资料.xlsx::6转正申请表
+source_file: 员工档案文件资料.xlsx
+sheet_name: 6转正申请表
+file_type: xlsx
+top_folder: 16员工档案
+title: 5转正申请表
+status: reviewed_ready
+generation_granularity: per_employee
+data_sources:
+- enterprise
+- employee
+prerequisites: []
+output_naming: 员工档案文件资料-{{employee.name}}-6转正申请表
+precheck_enabled: true
+variables:
+- key: 姓名
+  label: 姓名
+  source: employee.name
+  type: text
+  location: 姓名
+- key: 岗位
+  label: 岗位
+  source: employee.position_name
+  type: text
+  location: 岗位
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print
+review_notes: 16员工档案子域首批复核 - 变量绑定已确认

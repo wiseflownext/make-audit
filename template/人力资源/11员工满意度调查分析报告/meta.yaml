@@ -1,0 +1,68 @@
+id: 20员工激励__2024年度员工满意度调查分析报告-xls__员工满意度调查分析报告
+original_path: 20员工激励/2024年度员工满意度调查分析报告.xls::员工满意度调查分析报告
+source_file: 2024年度员工满意度调查分析报告.xls
+sheet_name: 员工满意度调查分析报告
+file_type: xls
+top_folder: 20员工激励
+title: 11员工满意度调查分析报告
+status: pending_review
+generation_granularity: per_enterprise
+data_sources:
+- enterprise
+- incentive
+- document
+- signature
+prerequisites: []
+output_naming: "{{incentive.survey_year}}年度员工满意度调查分析报告"
+precheck_enabled: true
+variables:
+- key: enterprise.name
+  label: 公司名称
+  source: enterprise.name
+  type: text
+- key: incentive.survey_year
+  label: 调查年度
+  source: incentive.survey_year
+  type: text
+- key: incentive.survey_month
+  label: 调查月份
+  source: incentive.survey_month
+  type: text
+- key: incentive.overall_score
+  label: 总体满意度得分
+  source: incentive.overall_score
+  type: text
+- key: incentive.dimension_summary
+  label: 各维度得分
+  source: incentive.dimension_summary
+  type: text
+- key: incentive.strength_summary
+  label: 优势项目
+  source: incentive.strength_summary
+  type: text
+- key: incentive.weakness_summary
+  label: 不足项目
+  source: incentive.weakness_summary
+  type: text
+- key: incentive.improvement_suggestions
+  label: 改进建议
+  source: incentive.improvement_suggestions
+  type: text
+- key: incentive.conclusion
+  label: 结论
+  source: incentive.conclusion
+  type: text
+- &id001
+  key: document.date
+  label: 报告日期
+  source: document.date
+  type: date
+- key: signature.hr_manager
+  label: 报告撰写人
+  source: signature.hr_manager
+  type: text
+signature_mappings: []
+date_mappings:
+- *id001
+checkbox_mappings: []
+render_mode: a4-print

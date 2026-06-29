@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>5转正申请表</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; }
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 2mm; }
+.page.fill-page .form-table { flex: 1 1 auto; height: 100%; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.page.fill-page .form-table tr.grow td { height: 100%; vertical-align: top; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tiny { font-size: 7pt; }
+.label-col { width: 14%; text-align: center; }
+.photo-box { width: 22mm; vertical-align: middle; }
+.skill-resume-table td, .skill-resume-table th { padding: 0.6mm 0.8mm; font-size: 8pt; line-height: 1.25; }
+.skill-resume-table .section-label { font-size: 8pt; }
+.skill-resume-table .info-label { white-space: nowrap; }
+.summary-box { min-height: 72mm; text-align: center; line-height: 1.8; padding: 8mm 6mm; }
+.page.fill-page .form-table td.summary-box { vertical-align: middle; }
+.opinion-box { min-height: 36mm; vertical-align: top; padding: 0; }
+.opinion-inner { display: flex; flex-direction: column; height: 100%; min-height: 34mm; padding: 1.2mm 1.4mm; }
+.opinion-sign { margin-top: auto; text-align: right; padding-top: 4mm; }
+.contract-wrap { border: 1px solid #000; padding: 6mm 8mm; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; }
+.contract-body p { margin: 0 0 2mm; line-height: 1.65; text-indent: 0; }
+.contract-body .clause { margin-bottom: 1.5mm; }
+.contract-body .sub { text-indent: 2em; }
+.contract-sign { margin-top: 8mm; line-height: 2.2; }
+.text-list p { margin: 0 0 3mm; line-height: 1.65; font-weight: 700; }
+.text-list .sign-block { margin-top: auto; padding-top: 12mm; text-align: center; font-weight: 700; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; width: 100%; height: 100vh; min-height: 0; } .page.landscape { width: 100%; height: 100vh; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 16员工档案/员工档案文件资料.xlsx::6转正申请表</div>
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="center bold" style="font-size:16pt;margin:2mm 0">转正申请表</div>
+  <div class="right small">编号：JLSP-02-04-06</div>
+</div>
+<table class="form-table">
+<colgroup>
+<col style="width:12%"><col style="width:14%"><col style="width:12%"><col style="width:14%">
+<col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:12%">
+</colgroup>
+<tr>
+  <td class="center">姓名</td><td colspan="2" class="center">{{employee.name}}</td>
+  <td class="center">录用时间</td><td colspan="2" class="center">{{employee.hire_date}}</td>
+  <td class="center">岗位</td><td class="center">{{employee.position_name}}</td>
+</tr>
+<tr><td class="center">试用期</td><td colspan="7" class="center">　　年　　月　　日至　　年　　月　　日</td></tr>
+<tr class="grow">
+  <td class="center" style="width:12%">本人试用期<br>工作小结</td>
+  <td colspan="7" class="summary-box">试用期内，本人认真履行岗位职责，虚心学习业务技能，积极参与团队工作，按时完成各项工作任务。现已熟悉岗位操作流程，能够独立胜任本职工作，特此申请转正。</td>
+</tr>
+<tr>
+  <td colspan="4" class="right">申请人：{{employee.signature}}</td>
+  <td colspan="4" class="right">日期：{{document.date}}</td>
+</tr>
+<tr class="grow">
+  <td class="center">部门负责人意见</td>
+  <td colspan="3" class="opinion-box"><div class="opinion-inner"><div class="opinion-sign">签字：{{signature.department_head}}　　日期：</div></div></td>
+  <td class="center">总经理意见</td>
+  <td colspan="3" class="opinion-box"><div class="opinion-inner"><div class="opinion-sign">签字：{{signature.general_manager}}　　日期：</div></div></td>
+</tr>
+</table>
+</section></body></html>

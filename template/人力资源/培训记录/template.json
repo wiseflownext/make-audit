@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "id": "18培训计划__培训记录__2024年培训记录-空白表单-xlsx__培训记录",
+    "original_path": "18培训计划/培训记录/2024年培训记录（空白表单）.xlsx::培训记录",
+    "source_file": "2024年培训记录（空白表单）.xlsx",
+    "sheet_name": "培训记录",
+    "file_type": "xlsx",
+    "top_folder": "18培训计划",
+    "title": "培训记录",
+    "status": "pending_review",
+    "generation_granularity": "per_enterprise",
+    "data_sources": [
+      "enterprise",
+      "employee",
+      "training",
+      "training.exam",
+      "training.evaluation"
+    ],
+    "prerequisites": [],
+    "output_naming": "培训记录-{{training.course_name}}",
+    "precheck_enabled": true,
+    "variables": [
+      {
+        "key": "enterprise.name",
+        "label": "公司名称",
+        "source": "enterprise.name",
+        "type": "text",
+        "location": "R1"
+      },
+      {
+        "key": "document.date",
+        "label": "填表日期",
+        "source": "document.date",
+        "type": "date",
+        "location": "R4"
+      },
+      {
+        "key": "training.course_name",
+        "label": "培训课程",
+        "source": "training.course_name",
+        "type": "text",
+        "location": "R5"
+      },
+      {
+        "key": "training.instructor_name",
+        "label": "讲师姓名",
+        "source": "training.instructor_name",
+        "type": "text",
+        "location": "R5"
+      },
+      {
+        "key": "training.period",
+        "label": "培训期间",
+        "source": "training.period",
+        "type": "date",
+        "location": "R6"
+      },
+      {
+        "key": "training.duration",
+        "label": "时数",
+        "source": "training.duration",
+        "type": "text",
+        "location": "R6"
+      },
+      {
+        "key": "training.attendance",
+        "label": "应/实到人数",
+        "source": "training.attendance",
+        "type": "text",
+        "location": "R6"
+      },
+      {
+        "key": "training.location",
+        "label": "上课地点",
+        "source": "training.location",
+        "type": "text",
+        "location": "R7"
+      },
+      {
+        "key": "training.assessment_method",
+        "label": "考核方式",
+        "source": "training.assessment_method",
+        "type": "text",
+        "location": "R7"
+      },
+      {
+        "key": "training.content",
+        "label": "培训内容",
+        "source": "training.content",
+        "type": "text",
+        "location": "R8"
+      },
+      {
+        "key": "training.target_departments",
+        "label": "面向部门",
+        "source": "training.target_departments",
+        "type": "text",
+        "location": "R13-R27"
+      },
+      {
+        "key": "training.evaluation",
+        "label": "培训有效性评价",
+        "source": "training.evaluation",
+        "type": "text",
+        "location": "R28"
+      },
+      {
+        "key": "row.index",
+        "label": "序号",
+        "source": "row.index",
+        "type": "text",
+        "location": "R14"
+      },
+      {
+        "key": "employee.department_name",
+        "label": "部门",
+        "source": "employee.department_name",
+        "type": "text",
+        "location": "R14"
+      },
+      {
+        "key": "employee.name",
+        "label": "签到",
+        "source": "employee.name",
+        "type": "signature",
+        "location": "R14"
+      },
+      {
+        "key": "training.exam.first_score",
+        "label": "首试",
+        "source": "training.exam.first_score",
+        "type": "text",
+        "location": "R14"
+      },
+      {
+        "key": "training.exam.retake_score",
+        "label": "补考",
+        "source": "training.exam.retake_score",
+        "type": "text",
+        "location": "R14"
+      },
+      {
+        "key": "training.exam.passed",
+        "label": "合格",
+        "source": "training.exam.passed",
+        "type": "checkbox",
+        "location": "R14"
+      },
+      {
+        "key": "training.exam.retrain",
+        "label": "再训",
+        "source": "training.exam.retrain",
+        "type": "checkbox",
+        "location": "R14"
+      }
+    ],
+    "signature_mappings": [],
+    "date_mappings": [
+      {
+        "key": "document.date",
+        "label": "填表日期",
+        "source": "document.date",
+        "location": "R4"
+      }
+    ],
+    "checkbox_mappings": [
+      {
+        "key": "training.exam.passed",
+        "label": "合格",
+        "source": "training.exam.passed",
+        "location": "R14"
+      },
+      {
+        "key": "training.exam.retrain",
+        "label": "再训",
+        "source": "training.exam.retrain",
+        "location": "R14"
+      }
+    ],
+    "template_family": "training_record_form",
+    "format_note": "所有培训记录 sheet 版式相同，仅培训课程、培训期间/时数、培训内容、面向部门（签到表）随场次变化。",
+    "render_mode": "a4-print"
+  },
+  "structured": {
+    "kind": "training_record_form",
+    "render_mode": "a4-print",
+    "template_family": "training_record_form",
+    "blank_template": true,
+    "session_key": null,
+    "session_defaults": {}
+  }
+}

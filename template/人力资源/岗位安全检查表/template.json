@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "id": "21岗位安全__岗位安全检查表-xls__2月份",
+    "original_path": "21岗位安全/岗位安全检查表.xls::2月份",
+    "source_file": "岗位安全检查表.xls",
+    "sheet_name": "2月份",
+    "file_type": "xls",
+    "top_folder": "21岗位安全",
+    "title": "岗位安全检查表",
+    "status": "pending_review",
+    "generation_granularity": "per_position_per_month",
+    "data_sources": [
+      "enterprise",
+      "employee",
+      "position_safety"
+    ],
+    "prerequisites": [],
+    "output_naming": "岗位安全检查表-2月份",
+    "precheck_enabled": true,
+    "variables": [
+      {
+        "key": "enterprise.name",
+        "label": "公司名称",
+        "source": "enterprise.name",
+        "type": "text"
+      },
+      {
+        "key": "employee.position_name",
+        "label": "岗位",
+        "source": "employee.position_name",
+        "type": "text"
+      },
+      {
+        "key": "position_safety.month_label",
+        "label": "月份",
+        "source": "position_safety.month_label",
+        "type": "text"
+      },
+      {
+        "key": "position_safety.inspection_year",
+        "label": "检查年度",
+        "source": "position_safety.inspection_year",
+        "type": "text"
+      },
+      {
+        "key": "position_safety.rectification_notes",
+        "label": "问题及整改情况",
+        "source": "position_safety.rectification_notes",
+        "type": "text"
+      },
+      {
+        "key": "signature.inspector_on_duty",
+        "label": "当班检查人",
+        "source": "signature.inspector_on_duty",
+        "type": "signature"
+      }
+    ],
+    "signature_mappings": [
+      {
+        "key": "signature.inspector_on_duty",
+        "label": "当班检查人",
+        "source": "signature.inspector_on_duty",
+        "type": "signature"
+      }
+    ],
+    "date_mappings": [],
+    "checkbox_mappings": [],
+    "template_family": "position_safety_inspection",
+    "session_key": "2月份",
+    "session_defaults": {
+      "position_safety.month_label": "2月份"
+    },
+    "render_mode": "a4-print"
+  },
+  "structured": {
+    "kind": "position_safety_inspection",
+    "render_mode": "a4-print",
+    "orientation": "landscape",
+    "month_label": "2月份",
+    "item_count": 11
+  }
+}

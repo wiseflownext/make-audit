@@ -1,0 +1,47 @@
+id: 16员工档案__员工档案文件资料-xlsx__2新员工入职需知
+original_path: 16员工档案/员工档案文件资料.xlsx::2新员工入职需知
+source_file: 员工档案文件资料.xlsx
+sheet_name: 2新员工入职需知
+file_type: xlsx
+top_folder: 16员工档案
+title: 1新员工入职需知
+status: reviewed_ready
+generation_granularity: per_employee
+data_sources:
+- enterprise
+- employee
+- contract
+prerequisites: []
+output_naming: 员工档案文件资料-{{employee.name}}-2新员工入职需知
+precheck_enabled: true
+variables:
+- key: enterprise.name
+  label: 企业名称
+  source: enterprise.name
+  type: text
+  location: 页眉企业名称
+- key: employee.position_name
+  label: 岗位
+  source: employee.position_name
+  type: text
+  location: 第10条岗位工资
+- key: contract.probation_salary
+  label: 岗位工资
+  source: contract.probation_salary
+  type: text
+  location: 第10条岗位工资
+- key: employee.signature
+  label: 员工签名
+  source: employee.signature
+  type: signature
+  location: 员工签名
+- key: document.date
+  label: 日期
+  source: document.date
+  type: text
+  location: 员工签名日期
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print
+review_notes: 16员工档案子域首批复核 - 变量绑定已确认

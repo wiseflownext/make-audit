@@ -1,0 +1,16 @@
+id: 人力资源__个人培训记录表
+title: 个人培训记录表
+status: reviewed_ready
+generation_granularity: per_employee_per_year
+data_sources:
+  - enterprise
+  - employee
+  - training
+prerequisites: []
+output_naming: 个人培训记录-{{employee.name}}-{{document.year}}年
+precheck_enabled: true
+variables: []
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print

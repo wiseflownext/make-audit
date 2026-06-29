@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>3用工合同协议书</title><style>
+@page { size: A4; margin: 10mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 9pt; line-height: 1.25; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 10mm; background: #fff; box-shadow: 0 0 0 1px #bbb; }
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 2mm; }
+.page.fill-page .form-table { flex: 1 1 auto; height: 100%; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.page.fill-page .form-table tr.grow td { height: 100%; vertical-align: top; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tiny { font-size: 7pt; }
+.label-col { width: 14%; text-align: center; }
+.photo-box { width: 22mm; vertical-align: middle; }
+.skill-resume-table td, .skill-resume-table th { padding: 0.6mm 0.8mm; font-size: 8pt; line-height: 1.25; }
+.skill-resume-table .section-label { font-size: 8pt; }
+.skill-resume-table .info-label { white-space: nowrap; }
+.lined-box { min-height: 72mm; vertical-align: top; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 7.4mm, #000 7.4mm, #000 7.5mm); background-size: 100% 7.5mm; }
+.opinion-box { min-height: 36mm; vertical-align: top; padding: 0; }
+.opinion-inner { display: flex; flex-direction: column; height: 100%; min-height: 34mm; padding: 1.2mm 1.4mm; }
+.opinion-sign { margin-top: auto; text-align: right; padding-top: 4mm; }
+.contract-wrap { border: 1px solid #000; padding: 4mm 6mm; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; }
+.contract-body p { margin: 0 0 1mm; line-height: 1.4; text-indent: 0; }
+.contract-body .clause { margin-bottom: 1mm; }
+.contract-body .sub { text-indent: 2em; }
+.contract-sign { margin-top: 4mm; line-height: 1.8; }
+.text-list p { margin: 0 0 3mm; line-height: 1.65; font-weight: 700; }
+.text-list .sign-block { margin-top: auto; padding-top: 12mm; text-align: center; font-weight: 700; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; width: 100%; height: 100vh; min-height: 0; } .page.landscape { width: 100%; height: 100vh; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 16员工档案/员工档案文件资料.xlsx::4用工合同协议书</div>
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="right small">编号：JLSP-02-04-04</div>
+  <div class="center bold" style="font-size:14pt;margin:2mm 0">用工合同协议书</div>
+</div>
+<div class="contract-wrap">
+<div class="contract-body">
+<p class="clause">甲方：{{enterprise.name}}</p>
+<p class="clause">乙方：{{employee.name}}　　身份证号码：{{employee.id_no}}</p>
+<p class="clause">1、根据有关规定，经协商甲、乙双方共同签订本协议，共同执行。</p>
+<p class="clause">2、本协议期限为：自{{document.date}}起至工作离职后</p>
+<p class="clause">3、工作任务：</p>
+<p class="sub">3.1 甲方安排乙方在 {{employee.position_name}} 岗位，从事该岗位职责范围内的工作；</p>
+<p class="sub">3.2 乙方的岗位、职责及工作质量要求，按照甲方的有关规定执行；</p>
+<p class="sub">3.3 乙方应完成工作任务，执行安全规程，遵守劳动纪律和职业道德；</p>
+<p class="sub">3.4 因甲方生产(工作)情况发生变化或乙方不能胜任岗位时，乙方应服从甲方的工作安排和调配。</p>
+<p class="clause">4、劳动报酬：</p>
+<p class="sub">试工期7天：80元/天</p>
+<p class="sub">计件工资（小写）：　　　　每月工资（大写）：</p>
+<p class="sub">每月工资（小写）：　　　　每月工资（大写）：</p>
+<p class="sub">超过试工期后按照计件工资进行工资核算；试工期工资发放基准为最终能留在公司，按照公司统一工资发放为准；试工期后，在公司统一工资发放前，未能留下，则试工期工资不再发放。其它各种福利、津贴均含在当月的劳动报酬中而不再另行计发。</p>
+<p class="clause">5、劳动纪律：</p>
+<p class="sub">5.1 乙方应严格遵守国家各项法律规定，遵守甲方的工作规范、操作规程、劳动安全卫生制度等各项规章制度，同时，爱护甲方财物，保守甲方机密，维护甲方利益，服从甲方的领导、管理和教育。</p>
+<p class="sub">5.2 乙方违反劳动纪律，甲方可对其进行批评教育，直至按有关规定给予必要的纪律处分或解聘。</p>
+<p class="clause">6、协议的终止、变更、续签和解除：</p>
+<p class="sub">6.1 本协议由于生产工作需要，在双方同意条件下，可更改协议，并应提前1个月更改协议手续。</p>
+<p class="sub">6.2 经双方协商同意，可以变更协议有关内容并办理协议变更手续。</p>
+<p class="sub">6.3 甲方可以根据国家有关规定和生产经营状况解除本协议。</p>
+<p class="sub">6.4 具有下列情况之一，乙方可以解除本协议：生产安全、卫生条件恶劣、严重危害职工身体健康，企业又不加以改善的；甲方违反劳动协议或法律、行政法规，侵害乙方合法权益的。</p>
+<p class="sub">6.5 任何一方提前解除协议，均应提前30天通知对方。</p>
+<p class="clause">7、任何一方违反本协议规定，给对方成经济损失，应视其后果和责任大小按有关规定予以赔偿。</p>
+<p class="clause">8、协议如有未尽事宜，凡属国家有规定的，按有关规定执行；凡属国家没有规定的，甲、乙双方可协商修订、补充；如不能解决，可以到人民法院进行仲裁。</p>
+<p class="clause">9、本协议双方签字即生效。协议一式贰份，甲、乙双方各持一份，具有同等法律效力。</p>
+</div>
+<div class="contract-sign">
+<div>乙方(签字)：{{employee.signature}}</div>
+<div>甲方综管部领导(签字)：{{signature.hr_manager}}　　甲方部门领导(签字)：{{signature.hr_manager}}</div>
+<div>甲方：{{enterprise.name}}</div>
+<div>合同签订日期：{{document.date}}</div>
+</div>
+</div>
+</section></body></html>

@@ -1,0 +1,50 @@
+id: 18培训计划__培训计划__2025-年培训计划表-xls__2024年培训计划
+original_path: 18培训计划/培训计划/2025 年培训计划表.xls::2024年培训计划
+source_file: 2025 年培训计划表.xls
+sheet_name: 2024年培训计划
+file_type: xls
+top_folder: 18培训计划
+title: 年培训计划
+status: pending_review
+generation_granularity: per_year
+data_sources:
+- enterprise
+- employee
+- training
+- training.exam
+- training.evaluation
+prerequisites: []
+output_naming: '{{document.year}}年度培训计划表'
+precheck_enabled: true
+variables:
+- key: enterprise.name
+  label: 公司名称
+  source: enterprise.name
+  type: text
+- key: training.year
+  label: 计划年度
+  source: training.year
+  type: text
+- &id001
+  key: signature.prepared_by
+  label: 编制
+  source: signature.prepared_by
+  type: signature
+- &id002
+  key: signature.reviewed_by
+  label: 审核
+  source: signature.reviewed_by
+  type: signature
+- &id003
+  key: signature.approved_by
+  label: 批准
+  source: signature.approved_by
+  type: signature
+signature_mappings:
+- *id001
+- *id002
+- *id003
+date_mappings: []
+checkbox_mappings: []
+plan_year: '2024'
+render_mode: a4-print

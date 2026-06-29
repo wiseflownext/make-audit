@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>2公司入职人员登记表</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 2mm; }
+.page.fill-page .form-table { flex: 1 1 auto; height: 100%; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.page.fill-page .form-table tr.grow td { height: 100%; vertical-align: top; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tiny { font-size: 7pt; }
+.label-col { width: 14%; text-align: center; }
+.photo-box { width: 22mm; vertical-align: middle; }
+.skill-resume-table td, .skill-resume-table th { padding: 0.6mm 0.8mm; font-size: 8pt; line-height: 1.25; }
+.skill-resume-table .section-label { font-size: 8pt; }
+.skill-resume-table .info-label { white-space: nowrap; }
+.lined-box { min-height: 72mm; vertical-align: top; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 7.4mm, #000 7.4mm, #000 7.5mm); background-size: 100% 7.5mm; }
+.opinion-box { min-height: 36mm; vertical-align: top; padding: 0; }
+.opinion-inner { display: flex; flex-direction: column; height: 100%; min-height: 34mm; padding: 1.2mm 1.4mm; }
+.opinion-sign { margin-top: auto; text-align: right; padding-top: 4mm; }
+.contract-wrap { border: 1px solid #000; padding: 6mm 8mm; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; }
+.contract-body p { margin: 0 0 2mm; line-height: 1.65; text-indent: 0; }
+.contract-body .clause { margin-bottom: 1.5mm; }
+.contract-body .sub { text-indent: 2em; }
+.contract-sign { margin-top: 8mm; line-height: 2.2; }
+.text-list p { margin: 0 0 3mm; line-height: 1.65; font-weight: 700; }
+.text-list .sign-block { margin-top: auto; padding-top: 12mm; text-align: center; font-weight: 700; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page.landscape { width: 297mm; min-height: 210mm; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 16员工档案/员工档案文件资料.xlsx::3公司入职人员登记表</div>
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="center bold" style="font-size:16pt;margin:2mm 0">公司入职人员登记表</div>
+  <div class="right small">编号：JLSP-02-04-03</div>
+</div>
+<table class="form-table">
+<colgroup>
+<col style="width:11%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
+<col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:9%">
+<col style="width:10%"><col style="width:10%">
+</colgroup>
+<tr>
+  <td class="center bold">应聘职位</td><td colspan="3" class="center">{{employee.position_name}}</td>
+  <td colspan="2" class="center bold">专业</td><td colspan="3" class="center">&nbsp;</td>
+  <td rowspan="3" class="center photo-box">（照片）</td>
+</tr>
+<tr>
+  <td class="center bold">姓名</td><td colspan="2" class="center">{{employee.name}}</td>
+  <td class="center bold">性别</td><td colspan="2" class="center">{{employee.gender}}</td>
+  <td class="center bold">民族</td><td colspan="2" class="center">汉族</td>
+</tr>
+<tr>
+  <td class="center bold">出生年月</td><td colspan="2" class="center">{{employee.birth_date}}</td>
+  <td class="center bold">政治面貌</td><td colspan="2" class="center">群众</td>
+  <td class="center bold">出生地</td><td colspan="2" class="center">&nbsp;</td>
+</tr>
+<tr>
+  <td class="center bold">参加工作时间</td><td colspan="2" class="center">&nbsp;</td>
+  <td class="center bold">籍贯</td><td colspan="6" class="center">&nbsp;</td>
+</tr>
+<tr>
+  <td class="center bold">学历</td><td colspan="2" class="center">{{employee.education}}</td>
+  <td class="center bold">毕业院校</td><td colspan="3" class="center">{{employee.school}}</td>
+  <td colspan="2" class="center bold">身高</td><td class="right">Cm</td>
+</tr>
+<tr>
+  <td class="center bold">户口所在地</td><td colspan="2" class="center">&nbsp;</td>
+  <td class="center bold">档案存放地</td><td colspan="2" class="center">&nbsp;</td>
+  <td class="center bold">社保缴纳情况</td><td colspan="3" class="center">&nbsp;</td>
+</tr>
+<tr><td class="center bold">现家庭住址</td><td colspan="9" class="center">{{employee.address}}</td></tr>
+<tr>
+  <td class="center bold">手机号码</td><td colspan="5" class="center">{{employee.phone}}</td>
+  <td class="center bold">固定电话</td><td colspan="3" class="center">&nbsp;</td>
+</tr>
+<tr>
+  <td class="center bold">身份证号码</td><td colspan="5" class="center">{{employee.id_no}}</td>
+  <td class="center bold">电子邮箱</td><td colspan="3" class="center">&nbsp;</td>
+</tr>
+<tr>
+  <td rowspan="2" class="center bold">外语语种及水平</td><td rowspan="2" colspan="5" class="center">&nbsp;</td>
+  <td rowspan="2" class="center bold">计算机水平</td><td rowspan="2" colspan="3" class="center">&nbsp;</td>
+</tr><tr></tr>
+<tr>
+  <td rowspan="2" class="center bold">专业技术资格证书</td><td rowspan="2" colspan="5" class="center">&nbsp;</td>
+  <td rowspan="2" class="center bold">专业特长</td><td rowspan="2" colspan="3" class="center">&nbsp;</td>
+</tr><tr></tr>
+<tr>
+  <td rowspan="5" class="center bold">教育及培训经历</td>
+  <td class="center bold">起止年月</td><td colspan="5" class="center bold">学校名称</td><td colspan="3" class="center bold">所学专业</td>
+</tr>
+<tr><td>&nbsp;</td><td colspan="5">&nbsp;</td><td colspan="3">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="5">&nbsp;</td><td colspan="3">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="5">&nbsp;</td><td colspan="3">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="5">&nbsp;</td><td colspan="3">&nbsp;</td></tr>
+<tr>
+  <td rowspan="6" class="center bold">工作经历</td>
+  <td class="center bold">起止年月</td><td colspan="3" class="center bold">工作单位</td>
+  <td colspan="2" class="center bold">工作内容</td><td class="center bold">职务</td><td colspan="2" class="center bold">证明人及电话</td>
+</tr>
+<tr><td>&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="2">&nbsp;</td><td>&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="2">&nbsp;</td><td>&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="2">&nbsp;</td><td>&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="2">&nbsp;</td><td>&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="3">&nbsp;</td><td colspan="2">&nbsp;</td><td>&nbsp;</td><td colspan="2">&nbsp;</td></tr>
+<tr><td colspan="10">本人承诺：上述表格中所填写的内容真实。录用后如发现填写信息虚假行为，本人同意解除劳动合同并终止劳动关系。</td></tr>
+<tr class="grow"><td colspan="10" class="center">签名：{{employee.signature}}　　日期：{{document.date}}</td></tr>
+<tr><td colspan="10">附：身份证复印件。</td></tr>
+</table>
+</section></body></html>

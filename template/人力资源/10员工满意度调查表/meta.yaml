@@ -1,0 +1,35 @@
+id: 20员工激励__2024年度员工满意度调查分析报告-xls__员工满意度调查表
+original_path: 20员工激励/2024年度员工满意度调查分析报告.xls::员工满意度调查表
+source_file: 2024年度员工满意度调查分析报告.xls
+sheet_name: 员工满意度调查表
+file_type: xls
+top_folder: 20员工激励
+title: 10员工满意度调查表
+status: pending_review
+generation_granularity: per_enterprise
+data_sources:
+- enterprise
+- employee
+- incentive
+prerequisites: []
+output_naming: 员工满意度调查表-{{incentive.survey_year}}
+precheck_enabled: true
+variables:
+- key: enterprise.name
+  label: 公司名称
+  source: enterprise.name
+  type: text
+- &id001
+  key: document.date
+  label: 填表日期
+  source: document.date
+  type: date
+- key: employee.department_name
+  label: 部门
+  source: employee.department_name
+  type: text
+signature_mappings: []
+date_mappings:
+- *id001
+checkbox_mappings: []
+render_mode: a4-print

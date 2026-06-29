@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "id": "16员工档案__员工档案文件资料-xlsx__3公司入职人员登记表",
+    "original_path": "16员工档案/员工档案文件资料.xlsx::3公司入职人员登记表",
+    "source_file": "员工档案文件资料.xlsx",
+    "sheet_name": "3公司入职人员登记表",
+    "file_type": "xlsx",
+    "top_folder": "16员工档案",
+    "title": "2公司入职人员登记表",
+    "status": "pending_review",
+    "generation_granularity": "per_employee",
+    "data_sources": [
+      "enterprise",
+      "employee"
+    ],
+    "prerequisites": [],
+    "output_naming": "员工档案文件资料-{{employee.name}}",
+    "precheck_enabled": true,
+    "variables": [
+      {
+        "key": "field_1",
+        "label": "签名",
+        "source": "auto.detected",
+        "type": "signature",
+        "location": "签名"
+      }
+    ],
+    "signature_mappings": [],
+    "date_mappings": [],
+    "checkbox_mappings": [],
+    "render_mode": "a4-print"
+  },
+  "structured": {
+    "kind": "employee_archive_form",
+    "render_mode": "a4-print",
+    "sheet": "3公司入职人员登记表"
+  }
+}

@@ -1,0 +1,21 @@
+id: 16员工档案__员工档案文件资料-xlsx__8人员花名册
+original_path: 16员工档案/员工档案文件资料.xlsx::8人员花名册
+source_file: 员工档案文件资料.xlsx
+sheet_name: 8人员花名册
+file_type: xlsx
+top_folder: 16员工档案
+title: 人员花名册
+status: reviewed_ready
+generation_granularity: per_enterprise
+data_sources:
+- enterprise
+- employee
+prerequisites: []
+output_naming: 员工档案文件资料-人员花名册
+precheck_enabled: true
+variables: []
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print
+review_notes: 16员工档案子域首批复核 - 变量绑定已确认

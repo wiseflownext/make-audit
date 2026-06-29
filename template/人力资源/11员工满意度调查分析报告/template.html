@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>11员工满意度调查分析报告</title><style>
+@page { size: A4; margin: 15mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.65; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 15mm 18mm; background: #fff; box-shadow: 0 0 0 1px #bbb; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 9.5pt; }
+.section { margin: 5mm 0 3mm; }
+.section-title { font-weight: 700; margin: 4mm 0 2mm; }
+.paragraph { text-indent: 2em; margin: 0 0 2mm; }
+.report-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 3mm 0; font-size: 9.5pt; }
+.report-table th, .report-table td { border: 1px solid #000; padding: 1mm 1.5mm; vertical-align: middle; word-break: break-word; }
+.report-table th { background: #f5f5f5; font-weight: 700; text-align: center; }
+.report-table .num-col { width: 10%; text-align: center; }
+.report-table .score-col { width: 14%; text-align: center; }
+.report-table .item-col { text-align: left; }
+.stat-block { margin: 2mm 0 2mm 2em; }
+.stat-block p { margin: 0 0 1.5mm; text-indent: 0; }
+.sign-block { margin-top: 12mm; text-align: right; line-height: 2; }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 20员工激励/2024年度员工满意度调查分析报告.xls::员工满意度调查分析报告</div>
+
+<section class="page">
+<div class="center bold" style="font-size:16pt;margin-bottom:6mm">{{enterprise.name}}</div>
+<div class="center bold" style="font-size:18pt;margin-bottom:8mm">{{incentive.survey_year}}年度员工满意度调查分析报告</div>
+
+<div class="section">
+  <div class="section-title">一、调查基本情况</div>
+  <p class="paragraph">调查对象：全体员工。</p>
+  <p class="paragraph">调查时间：{{incentive.survey_year}}年{{incentive.survey_month}}月。</p>
+  <p class="paragraph">调查方式：问卷调查。</p>
+</div>
+
+<div class="section">
+  <div class="section-title">二、调查目的</div>
+  <p class="paragraph">了解员工对公司管理、工作环境、薪酬福利、职业发展等方面的真实感受和需求，发现管理中存在的不足，为管理层改进决策提供依据，进一步提升员工满意度和组织凝聚力。</p>
+</div>
+
+<div class="section">
+  <div class="section-title">三、调查问卷构成</div>
+  <p class="paragraph">本次调查问卷涵盖工作环境、薪酬福利、职业发展、管理与沟通、企业文化等五个维度，共46个调查项目，采用5分制量表（5分表示非常满意，1分表示非常不满意）。</p>
+</div>
+
+<div class="section">
+  <div class="section-title">四、调查项目得分</div>
+  <table class="report-table">
+    <colgroup><col class="num-col"><col class="item-col"><col class="score-col"></colgroup>
+    <tr><th>序号</th><th>调查项目</th><th>得分</th></tr>
+    <!-- LIST:report_items -->
+    <tr><td class="num-col">{{row.index}}</td><td class="item-col">{{report.item_text}}</td><td class="score-col">{{report.item_score}}</td></tr>
+    <!-- /LIST -->
+  </table>
+</div>
+</section>
+
+<section class="page">
+<div class="section">
+  <div class="section-title">五、满意度得分统计与分析</div>
+  <div class="stat-block">
+    <p><span class="bold">5.1 总体满意度：</span>{{incentive.overall_score}}分</p>
+    <p><span class="bold">5.2 各维度得分情况：</span>{{incentive.dimension_summary}}</p>
+    <p><span class="bold">5.3 优势项目：</span>{{incentive.strength_summary}}</p>
+    <p><span class="bold">5.4 不足项目：</span>{{incentive.weakness_summary}}</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">六、改进建议</div>
+  <p class="paragraph" style="white-space:pre-line">{{incentive.improvement_suggestions}}</p>
+</div>
+
+<div class="section">
+  <div class="section-title">七、结论</div>
+  <p class="paragraph">{{incentive.conclusion}}</p>
+</div>
+
+<div class="sign-block">
+  <div>报告撰写人：{{signature.hr_manager}}</div>
+  <div>日期：{{document.date}}</div>
+</div>
+</section>
+</body></html>

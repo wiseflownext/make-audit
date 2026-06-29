@@ -1,0 +1,73 @@
+id: 20员工激励__2024年度员工满意度调查分析报告-xls__1合理化建议表
+original_path: 20员工激励/2024年度员工满意度调查分析报告.xls::1合理化建议表
+source_file: 2024年度员工满意度调查分析报告.xls
+sheet_name: 1合理化建议表
+file_type: xls
+top_folder: 20员工激励
+title: 8合理化建议表
+status: pending_review
+generation_granularity: per_enterprise
+fixed_count: 10
+data_source_json: json文件/incentive-forms.json
+data_sources:
+- enterprise
+- employee
+- incentive
+prerequisites: []
+output_naming: 合理化建议表-{{document.seq_no}}-{{employee.name}}
+precheck_enabled: true
+variables:
+- key: enterprise.name
+  label: 公司名称
+  source: enterprise.name
+  type: text
+- key: employee.name
+  label: 建议人
+  source: employee.name
+  type: text
+- key: employee.department_name
+  label: 所在部门
+  source: employee.department_name
+  type: text
+- key: employee.position_name
+  label: 职务
+  source: employee.position_name
+  type: text
+- &id001
+  key: document.date
+  label: 建议日期
+  source: document.date
+  type: date
+- key: document.seq_no
+  label: 序号
+  source: document.seq_no
+  type: text
+- key: incentive.suggestion_category
+  label: 建议类别
+  source: incentive.suggestion_category
+  type: text
+- key: incentive.suggestion_topic
+  label: 建议主题
+  source: incentive.suggestion_topic
+  type: text
+- key: incentive.suggestion_current_state
+  label: 现状
+  source: incentive.suggestion_current_state
+  type: text
+- key: incentive.suggestion_content
+  label: 建议内容
+  source: incentive.suggestion_content
+  type: text
+- key: incentive.suggestion_expected_effect
+  label: 预计效果
+  source: incentive.suggestion_expected_effect
+  type: text
+- key: incentive.suggestion_review_opinion
+  label: 评审意见
+  source: incentive.suggestion_review_opinion
+  type: text
+signature_mappings: []
+date_mappings:
+- *id001
+checkbox_mappings: []
+render_mode: a4-print

@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>年培训计划</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10.5pt; line-height: 1.35; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+
+.page.fill-page { display: flex; flex-direction: column; }
+.page.fill-page > table { flex: 1 1 auto; height: 100%; }
+.page.fill-page table tr.grow td { height: 100%; vertical-align: top; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 1.2mm 1.4mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8pt; }
+.tall { height: 18mm; }
+.taller { height: 28mm; }
+.photo-box { height: 32mm; vertical-align: middle; }
+@media screen { .page.landscape { width: 297mm; min-height: 210mm; } }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page.landscape { width: 297mm; min-height: 210mm; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 18培训计划/培训计划/2025 年培训计划表.xls::2024年培训计划</div>
+<section class="page landscape"><table>
+<colgroup>
+<col style="width:4%"><col style="width:14%"><col style="width:10%"><col style="width:5%">
+<col style="width:5%"><col style="width:8%"><col style="width:7%"><col style="width:7%">
+<col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+<col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+<col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+</colgroup>
+<tr><td colspan="20" class="center bold" style="font-size:14pt">{{document.year}}年度教育培训计划表</td></tr>
+<tr><td colspan="20">{{enterprise.name}}</td></tr>
+<tr>
+  <td class="center bold">序号</td><td class="center bold">课程名称</td><td class="center bold">课程对象</td>
+  <td class="center bold">时数(H)</td><td class="center bold">培训方式</td><td class="center bold">组织部门</td>
+  <td class="center bold">讲师</td><td class="center bold">考核方式</td>
+  <td colspan="12" class="center bold">培训日程</td>
+</tr>
+<tr>
+  <td colspan="8">&nbsp;</td>
+  <th class="center">1月</th><th class="center">2月</th><th class="center">3月</th><th class="center">4月</th>
+  <th class="center">5月</th><th class="center">6月</th><th class="center">7月</th><th class="center">8月</th>
+  <th class="center">9月</th><th class="center">10月</th><th class="center">11月</th><th class="center">12月</th>
+</tr>
+<!-- LIST:annual_plan_rows -->
+<tr>
+  <td class="center">{{row.index}}</td>
+  <td class="center">{{training.course_name}}</td>
+  <td class="center">{{training.target_audience}}</td>
+  <td class="center">{{training.duration}}</td>
+  <td class="center">{{training.method}}</td>
+  <td class="center">{{training.organizer}}</td>
+  <td class="center">{{training.trainer}}</td>
+  <td class="center">{{training.assessment_method}}</td>
+  <td class="center">{{training.month_1}}</td>
+  <td class="center">{{training.month_2}}</td>
+  <td class="center">{{training.month_3}}</td>
+  <td class="center">{{training.month_4}}</td>
+  <td class="center">{{training.month_5}}</td>
+  <td class="center">{{training.month_6}}</td>
+  <td class="center">{{training.month_7}}</td>
+  <td class="center">{{training.month_8}}</td>
+  <td class="center">{{training.month_9}}</td>
+  <td class="center">{{training.month_10}}</td>
+  <td class="center">{{training.month_11}}</td>
+  <td class="center">{{training.month_12}}</td>
+</tr>
+<!-- /LIST -->
+<tr>
+  <td colspan="4">编制：{{signature.prepared_by}}</td>
+  <td colspan="4">审核：{{signature.reviewed_by}}</td>
+  <td colspan="12">批准：{{signature.approved_by}}</td>
+</tr>
+</table></section></body></html>

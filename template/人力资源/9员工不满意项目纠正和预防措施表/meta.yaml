@@ -1,0 +1,77 @@
+id: 20员工激励__2024年度员工满意度调查分析报告-xls__员工不满意项目纠正和预防措施表
+original_path: 20员工激励/2024年度员工满意度调查分析报告.xls::员工不满意项目纠正和预防措施表
+source_file: 2024年度员工满意度调查分析报告.xls
+sheet_name: 员工不满意项目纠正和预防措施表
+file_type: xls
+top_folder: 20员工激励
+title: 9员工不满意项目纠正和预防措施表
+status: pending_review
+generation_granularity: per_enterprise
+fixed_count: 10
+data_source_json: json文件/incentive-forms.json
+data_sources:
+- enterprise
+- employee
+- incentive
+prerequisites: []
+output_naming: 员工不满意项目纠正和预防措施表-{{document.seq_no}}-{{employee.department_name}}
+precheck_enabled: true
+variables:
+- key: enterprise.name
+  label: 公司名称
+  source: enterprise.name
+  type: text
+- key: employee.department_name
+  label: 责任部门
+  source: employee.department_name
+  type: text
+- key: employee.name
+  label: 部门责任人
+  source: employee.name
+  type: text
+- &id001
+  key: document.date
+  label: 日期
+  source: document.date
+  type: date
+- key: document.seq_no
+  label: 序号
+  source: document.seq_no
+  type: text
+- key: incentive.process_name
+  label: 过程
+  source: incentive.process_name
+  type: text
+- key: incentive.nonconformity_clause
+  label: 不符合条款
+  source: incentive.nonconformity_clause
+  type: text
+- key: incentive.nonconformity_severity
+  label: 不合格性质
+  source: incentive.nonconformity_severity
+  type: text
+- key: incentive.dissatisfaction_description
+  label: 不满意项目描述
+  source: incentive.dissatisfaction_description
+  type: text
+- key: incentive.root_cause_analysis
+  label: 原因分析
+  source: incentive.root_cause_analysis
+  type: text
+- key: incentive.corrective_action
+  label: 纠正或预防措施
+  source: incentive.corrective_action
+  type: text
+- key: incentive.corrective_implementation
+  label: 实施情况
+  source: incentive.corrective_implementation
+  type: text
+- key: incentive.corrective_verification
+  label: 有效性验证
+  source: incentive.corrective_verification
+  type: text
+signature_mappings: []
+date_mappings:
+- *id001
+checkbox_mappings: []
+render_mode: a4-print

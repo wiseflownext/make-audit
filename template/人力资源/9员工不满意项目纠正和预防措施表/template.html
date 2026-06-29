@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>9员工不满意项目纠正和预防措施表</title><style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e5e5e5; color: #000; }
+body { font-family: "SimSun", "Songti SC", "Microsoft YaHei", serif; font-size: 10pt; line-height: 1.2; }
+.preview-note { width: 210mm; margin: 8px auto; color: #555; font-size: 11px; font-family: "Microsoft YaHei", sans-serif; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto 12px; padding: 12mm; background: #fff; box-shadow: 0 0 0 1px #bbb; overflow: hidden; }
+.page.fill-page { display: flex; flex-direction: column; height: 297mm; }
+.page.fill-page .form-header { flex: 0 0 auto; margin-bottom: 1.5mm; height: 17mm; }
+.page.fill-page .form-table { flex: 1 1 auto; height: 236mm; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.page.fill-page .form-table td, .page.fill-page .form-table th { border: 1px solid #000; padding: 0.7mm 1mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+
+/* Precise Row Heights */
+.page.fill-page .form-table tr.meta-row { height: 7.5mm; }
+.page.fill-page .form-table tr.grow-row { height: 30mm; }
+.page.fill-page .form-table tr.grow-row td { vertical-align: top; }
+.page.fill-page .form-table tr.grow-row td.section-label { vertical-align: middle; text-align: center; font-size: 9.5pt; }
+.page.fill-page .form-table tr.grow-row td.content-cell { font-size: 9.5pt; line-height: 1.2; }
+.page.fill-page .form-table tr.sub-row { height: 7mm; }
+.page.fill-page .form-table tr.sub-row td { vertical-align: middle; font-size: 9.5pt; }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { border: 1px solid #000; padding: 0.7mm 1mm; vertical-align: middle; word-break: break-word; white-space: pre-wrap; }
+.center { text-align: center; }
+.right { text-align: right; }
+.left { text-align: left; }
+.bold { font-weight: 700; }
+.small { font-size: 8.5pt; }
+@media print { html, body { background:#fff; } .preview-note { display:none; } .page { margin:0; box-shadow:none; page-break-after: always; } .page:last-child { page-break-after: auto; } }
+</style></head><body><div class="preview-note">A4 黑白打印预览 · 20员工激励/2024年度员工满意度调查分析报告.xls::员工不满意项目纠正和预防措施表</div>
+<section class="page fill-page">
+<div class="form-header">
+  <div class="center bold">{{enterprise.name}}</div>
+  <div class="center bold" style="font-size:13pt;margin:1mm 0">员工不满意项目纠正和预防措施表</div>
+  <div class="right small">编号：JLSP-02-05-04</div>
+</div>
+<table class="form-table">
+<colgroup>
+<col style="width:12%"><col style="width:13%"><col style="width:12%"><col style="width:13%">
+<col style="width:10%"><col style="width:13%"><col style="width:12%"><col style="width:15%">
+</colgroup>
+<tr class="meta-row">
+  <td class="center">责任部门</td><td class="center">{{employee.department_name}}</td>
+  <td class="center">部门责任人</td><td class="center">{{employee.name}}</td>
+  <td class="center">过程</td><td class="center">{{incentive.process_name}}</td>
+  <td class="center">日期</td><td class="center">{{document.date}}</td>
+</tr>
+<tr class="meta-row">
+  <td class="center">不符合条款</td><td colspan="3">{{incentive.nonconformity_clause}}</td>
+  <td class="center">不合格性质</td><td colspan="3">{{incentive.nonconformity_severity}}</td>
+</tr>
+
+<!-- Section 1 -->
+<tr class="grow-row">
+  <td class="center section-label" rowspan="2">不满意项目描述</td>
+  <td colspan="7" class="content-cell">{{incentive.dissatisfaction_description}}</td>
+</tr>
+<tr class="sub-row">
+  <td class="center">负责人</td><td colspan="2" class="center">{{employee.name}}</td>
+  <td class="center">日期</td><td colspan="3" class="center">{{document.date}}</td>
+</tr>
+
+<!-- Section 2 -->
+<tr class="grow-row">
+  <td class="center section-label" rowspan="2">原因分析</td>
+  <td colspan="7" class="content-cell">{{incentive.root_cause_analysis}}</td>
+</tr>
+<tr class="sub-row">
+  <td class="center">分析人员</td><td colspan="2">&nbsp;</td>
+  <td class="center">日期</td><td colspan="3">&nbsp;</td>
+</tr>
+
+<!-- Section 3 -->
+<tr class="grow-row">
+  <td class="center section-label" rowspan="2">纠正或预防措施</td>
+  <td colspan="7" class="content-cell">{{incentive.corrective_action}}</td>
+</tr>
+<tr class="sub-row">
+  <td class="center">负责人</td><td colspan="2">&nbsp;</td>
+  <td class="center">日期</td><td colspan="3">&nbsp;</td>
+</tr>
+
+<!-- Section 4 -->
+<tr class="grow-row">
+  <td class="center section-label" rowspan="2">纠正或预防措施实施情况</td>
+  <td colspan="7" class="content-cell">{{incentive.corrective_implementation}}</td>
+</tr>
+<tr class="sub-row">
+  <td class="center">实施人</td><td colspan="2">&nbsp;</td>
+  <td class="center">日期</td><td colspan="3">&nbsp;</td>
+</tr>
+
+<!-- Section 5 -->
+<tr class="grow-row">
+  <td class="center section-label" rowspan="2">纠正或预防措施有效性的验证</td>
+  <td colspan="7" class="content-cell">{{incentive.corrective_verification}}</td>
+</tr>
+<tr class="sub-row">
+  <td class="center">验证人</td><td colspan="2">&nbsp;</td>
+  <td class="center">日期</td><td colspan="3">&nbsp;</td>
+</tr>
+</table>
+</section></body></html>

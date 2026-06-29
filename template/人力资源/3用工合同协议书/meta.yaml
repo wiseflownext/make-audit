@@ -1,0 +1,51 @@
+id: 16员工档案__员工档案文件资料-xlsx__4用工合同协议书
+original_path: 16员工档案/员工档案文件资料.xlsx::4用工合同协议书
+source_file: 员工档案文件资料.xlsx
+sheet_name: 4用工合同协议书
+file_type: xlsx
+top_folder: 16员工档案
+title: 3用工合同协议书
+status: reviewed_ready
+generation_granularity: per_employee
+data_sources:
+- enterprise
+- employee
+prerequisites: []
+output_naming: 员工档案文件资料-{{employee.name}}-4用工合同协议书
+precheck_enabled: true
+variables:
+- key: 岗位
+  label: 岗位
+  source: employee.position_name
+  type: text
+  location: 岗位
+- key: 部门
+  label: 部门
+  source: employee.department_name
+  type: text
+  location: 部门
+- key: 企业
+  label: 企业
+  source: enterprise.name
+  type: text
+  location: 企业
+- key: field_1
+  label: 签字
+  source: auto.detected
+  type: signature
+  location: 签字
+- key: field_2
+  label: 签字
+  source: auto.detected
+  type: signature
+  location: 签字
+- key: field_3
+  label: 签字
+  source: auto.detected
+  type: signature
+  location: 签字
+signature_mappings: []
+date_mappings: []
+checkbox_mappings: []
+render_mode: a4-print
+review_notes: 16员工档案子域首批复核 - 变量绑定已确认

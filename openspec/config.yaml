@@ -1,0 +1,96 @@
+schema: spec-driven
+
+context: |
+  # 项目概述
+  面向汽车零配件生产行业（IATF16949 体系）的人力资源审核资料自动生成系统。
+  主要用户是审核老师：为缺乏体系专员的工厂，在客户审核/体系审核前快速生成符合标准的人力资源档案资料包。
+
+  # 行业背景
+  - 大量零配件厂仍为销售导向，接到订单即可生产，缺乏懂 IATF16949 的专业人才。
+  - 实际落地成本高，降本压力下难以真实运行体系，审核前常临时找审核老师补资料。
+  - 痛点：大量格式一致、仅姓名/岗位/日期等基本信息不同的表单，需重复打印手写，耗时耗力。
+
+  # 产品形态
+  Web 服务 + 后端，三个核心界面：
+  1. 上传客户基本资料页（分模块）：人力模块上传员工花名册 + 可选手写签名照片
+  2. 资料包下载页：列出生成文件清单，一键下载 ZIP
+  3. 模版管理页：内置表单可在线编辑保存，维护 {{}} 占位符，预览真实替换效果
+
+  # 当前仓库状态
+  - 模版资产库：`template/人力资源/**`，每套含 template.html + meta.yaml + template.json
+  - 培训计划数据：`json文件/training-plan-comprehensive.json`（含 new_employee_training、annual_training_plan）
+  - 尚无 Web/后端应用代码，规划 change：build-hr-audit-document-generator
+  - OpenSpec 能力域：client-data-intake、signature-processing、document-template-management、
+    hr-document-generation、training-record-generation、audit-package-export
+
+  # 技术栈（已定）
+  - 后端：Python + FastAPI（花名册解析、规则引擎、HTML 渲染、PDF、ZIP）
+  - 前端：现代 Web UI（上传 / 下载 / 模版管理 + 预览）
+  - 模版渲染：HTML {{namespace.key}} 占位符替换 + A4 打印 CSS → PDF
+  - 依赖：openpyxl/pandas、Pillow/rembg、playwright 或 weasyprint
+
+  # 模版系统约定
+  - 以 meta.yaml 为单一生成配置源：generation_granularity、data_sources、variables、output_naming 等
+  - 占位符统一格式：{{namespace.key}}（禁止 {key} 等非标准写法）
+  - 数据命名空间：enterprise、employee、contract、training（含 training.exam）、
+    signature、document、incentive、position_safety
+  - 生成粒度示例：per_employee、per_employee_per_year、per_year、per_enterprise
+  - 输出命名遵循 meta.yaml 的 output_naming，如 员工档案文件资料-{{employee.name}}-2新员工入职需知
+
+  # 员工主数据（花名册）字段
+  必填/核心：name、department_name、position_name、hire_date
+  扩展：position_category、gender、id_no、birth_date、phone、education、school、address、remark、
+        is_key_position、is_internal_auditor、is_regular_employee、is_manager、employment_status
+  派生：birth_date、gender 可从 id_no 推导
+
+  # 档案生成规则
+  规则1 - 入职当天：新员工入职须知、公司入职人员登记表、用工合同协议书（文档日期=入职日期）
+  规则2 - 转正当天：岗位培训评价表、转正申请表、个人技能履历表
+         转正日期=入职日期+试用期（普通员工 7 天，其他 30 天，按工作日历调整）
+  规则3 - 日期必须真实合法，按单休+日历排算，不得出现 2 月 31 日等非法日期
+  规则4 - 近三年年度培训计划内容来自 training-plan-comprehensive.json 的 annual_training_plan
+  规则5 - 培训签到记录：从年度计划读日期/面向对象/培训名称/内容，匹配花名册员工；
+         签到表与个人培训记录表（一人一年一份）必须一致
+  其他：员工满意度表一人一年一份
+
+  # 签名规则
+  - 签名上传为非必填；上传则抠底为透明 PNG 电子签名，全局使用
+  - 未上传则使用非打印体/手写风格文本签名，不阻塞生成
+  - 管理人员签名（signature.hr_manager、signature.department_head 等）同规则
+
+  # 培训面向对象匹配
+  用显式映射表 + 规则解析（禁止自然语言模糊匹配）：
+  全体员工、新进员工、部门定向（如市场部员工）、岗位定向（如检验员、操作工）、
+  内审员、管理人员、重点岗位等 → 匹配员工 department_name / position_name / 布尔标识
+
+  # 系统定位与约束
+  - 基于真实员工资料生成，非虚构数据工厂
+  - 花名册输入为结构化 Excel/CSV，不做 OCR
+  - 电子签名仅视觉用途，不做法律存证
+  - 本期仅人力资源域，不含生产/采购/设备等其它体系模块
+  - 先单用户审核老师工作台，不做多租户计费与复杂权限
+
+  # 已知待修正
+  - template/人力资源/岗位安全检查表/template.html 中 {position_safety.month_label} 应改为 {{position_safety.month_label}}
+  - 需新增 template/人力资源/个人培训记录表/ 模版（per_employee_per_year）
+  - 人员花名册模版列需扩展以覆盖其它模版引用的 employee.* 字段
+
+  # 语言与文档
+  - 业务文档、模版标题、UI 文案使用中文
+  - 代码、变量名、能力 ID 使用英文 kebab-case 或 snake_case
+
+rules:
+  proposal:
+    - 明确目标用户（审核老师）与行业背景（IATF16949 汽车零配件）
+    - 列出 New Capabilities 时使用 kebab-case，与 specs/ 目录名一致
+    - 包含 Non-goals 或等价的范围边界说明
+  design:
+    - 以 meta.yaml 驱动的模版渲染架构为核心，说明数据流与命名空间
+    - 关键决策需给出备选方案及否决理由
+    - 标注真实员工、签名可选、日期合法排算等产品约束
+  specs:
+    - 需求使用 SHALL/MUST，场景使用 #### Scenario 与 WHEN/THEN
+    - 覆盖花名册字段、档案生成规则、培训联动、签名回退等域规则
+  tasks:
+    - 按依赖顺序分组：骨架 → 模版加载 → 花名册 → 日历 → 签名 → 渲染 → 生成规则 → 培训 → 导出 → UI
+    - 每项任务可在一个会话内完成，使用 - [ ] X.Y 格式
